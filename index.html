@@ -5,29 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>音乐上传管理</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./assets/jquery-filer.css">
+  <link rel="stylesheet" href="./drop_zone.css">
 </head>
+
 <body>
   
+  <header>
+    <div class="header_bg"></div>
+    <p>音乐上传管理</p>
+  </header>
+  
+  <main>
 
-  <div class="manager-container">
-    <div class="song-container">
-      <div class="song-list"></div>
-      <div class="add-song">
-        <form enctype="multipart/form-data" id="upload-form">
-          <input name="key" type="hidden" value="">
-          <input name="token" type="hidden" value="">
-          <input name="file" type="file" />
-          <input type="submit" value="上传文件" />
-        </form>
+    <aside class="song_list">
+      <ul class="song_items">
+
+      </ul>
+    </aside>
+
+    <div class="add_edit">
+      <div class="drop-container">
+        <div class="droppable">
+          <div class="drop-inner">
+            <div class="icon-jfi-cloud-up-o"></div>
+          </div>
+          <h3 class="caption">Drag and drop files here</h3>
+          <p>or</p>
+          <div class="browse-button">
+            <span>Browse files</span>
+          </div>
+        </div>
+    
+        <div class="upload-status">
+            <ul class="upload-items"></ul>
+        </div>
       </div>
     </div>
-
-    <div class="song-info"></div>
-  </div>
+  </main>
 
   <script src="./lib/qiniu.min.js"></script>
   <script src="./lib/av-min.js"></script>
+  <script src="./lib/jquery.min.js"></script>
+  <script src="./dropzone.js"></script>
+  <script src="./filehandler.js"></script>
   <script src="main.js"></script>
+
 </body>
 </html>
