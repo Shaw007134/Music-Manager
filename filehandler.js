@@ -20,6 +20,7 @@ function set_progress(){
 
 
 function uploadFile(fileobj){ 
+  var fileobj = fileobj
   var file = fileobj["file"]
   console.log(file)
   var progressBar = fileobj["progress"]
@@ -124,15 +125,61 @@ function uploadFile(fileobj){
         e.currentTarget.firstChild.className = 'success icon-jfi-check'
       }
     })
-    updateList(li,ul)
+    updateSongList()
+    updateProgressList(li,ul)
     process_array.remove(fileobj)
     set_progress()
   }
 
-  function updateList(li,ul){
+  function updateProgressList(li,ul){
     ul.scrollTop = li.offsetTop - 75;
   }
 
+  function updateSongList(){
+    var song_list = document.querySelector('.song_items')
+    var song = document.createElement('li')
+    var no = document.createElement('span')
+    var song_title = document.createElement('div')
+    var song_singer = document.createElement('div')
+    var song_duration = document.createElement('div')
+    var info_wrapper = document.createElement('div')
+
+
+    no.className = 'no'
+    song_title.className = 'song_title'
+    song_singer.className = 'song_singer'
+    song_duration.className = 'song_duration'
+    info_wrapper.className = 'info_wrapper'
+    
+    var length = document.querySelectorAll('.song_item').length
+    length = length + 1
+    no.innerHTML = length + '.'
+    song_title.innerHTML = fileobj["file"].name.split(' - ')[1].split('.')[0] || ''
+    song_singer.innerHTML = fileobj["file"].name.split(' - ')[0] || ''
+    song_duration.innerHTML = calc_time(fileobj["duration"]["minutes"], fileobj["duration"]["seconds"])
+    
+    song.appendChild(no)
+    song.appendChild(song_title)
+    info_wrapper.appendChild(song_singer)
+    info_wrapper.appendChild(song_duration)
+    song.appendChild(info_wrapper)
+    song.className = 'song_item'
+
+    song_list.appendChild(song)
+  }
+
+  function calc_time(minutes,seconds){
+    if(minutes < 10) return "0"+minutes+": "+ (seconds<10?"0"+seconds:seconds)
+    if(minutes>10 && minutes < 60)  return minutes+": "+(seconds<10?"0"+seconds:seconds)
+    if(minutes > 60){
+      var hour = Math.floor(minutes/60)
+      if(hour<10){
+        var minutes = minutes%60
+        if(minutes < 10) return "0"+hour+": "+"0"+minutes+": "+(seconds<10?"0"+seconds:seconds)
+        if(minutes>10 && minutes < 60)  return "0"+hour+": "+minutes+": "+(seconds<10?"0"+seconds:seconds)
+      }else return hour+": "+"0"+minutes+": "+(seconds<10?"0"+seconds:seconds)
+    }
+  }
 
   function uploadError(err){ 
     console.log(err)

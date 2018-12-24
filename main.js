@@ -43,14 +43,15 @@ createDropzone(element,filehandler)
 
 
 function getToken(){
-  var xhr = new XMLHttpRequest()
-  xhr.open('GET','http://47.104.228.220:3000/uptoken')
-  xhr.onreadystatechange = function(){
-    if(xhr.readyState === 4 && xhr.status === 200){
-      token = JSON.parse(xhr.responseText).uptoken
-      console.log(token)
-    }
-  }
-  xhr.send()
+  // var xhr = new XMLHttpRequest()
+  // xhr.open('GET','http://47.104.228.220:3000/uptoken')
+  // xhr.onreadystatechange = function(){
+  //   if(xhr.readyState === 4 && xhr.status === 200){
+  //     token = JSON.parse(xhr.responseText).uptoken
+  //     console.log(token)
+  //   }
+  // }
+  // xhr.send()
+  token = "NHoNtSaQ4SA9yOtrQ3Ah9gy8J8ADM1dxOnt-yI7X:gb3UQCOZmBxwAcy9bE2bDtO-QCg=:eyJzY29wZSI6Im11c2ljLW1hbmFnZXIiLCJkZWFkbGluZSI6MTU0NTUzNzk0N30="
 }
 window.addEventListener('load',getToken,false)

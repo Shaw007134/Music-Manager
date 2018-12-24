@@ -13,6 +13,47 @@ Array.prototype.remove = function(val) {
 
 
 function createDropzone(element,callback){
+
+  // var droppable = document.createElement('div')
+  // droppable.className = 'droppable'
+  // element.appendChild(droppable)
+
+  // var drop_inner = document.createElement('div')
+  // drop_inner.className = 'drop-inner'
+  // droppable.appendChild(drop_inner)
+
+  // var cloud_icon = document.createElement('div')
+  // cloud_icon.className = 'icon-jfi-cloud-up-o'
+  // drop_inner.appendChild(cloud_icon)
+
+  // var inner_caption = document.createElement('h3')
+  // inner_caption.className = 'caption'
+  // inner_caption.innerHTML = 'Drag and drop files here'
+  // drop_inner.appendChild(inner_caption)
+
+  // var inner_p = document.createElement('p')
+  // inner_p.innerHTML = 'or'
+  // drop_inner.appendChild(inner_p)
+
+  // var browse_button = document.createElement('div')
+  // browse_button.className = 'browse_button'
+  // drop_inner.appendChild(browse_button)
+
+  // var button_span = document.createElement('span')
+  // button_span.innerHTML = 'Browse files'
+  // drop_inner.appendChild(button_span)
+
+
+  // var upload_status = document.createElement('div')
+  // upload_status.className = 'upload_status'
+  // element.appendChild(uploadstatus)
+
+  // var upload_items = document.createElement('div')
+  // upload_items.className = 'upload-items'
+  // upload_status.appendChild(upload_items)
+
+  
+
   var input = document.createElement('input')
   input.setAttribute('type','file')
   input.setAttribute('multiple',true)
@@ -86,19 +127,21 @@ function filehandler(files) {
     title.setAttribute('class','column-title')
     action.setAttribute('class','column-action')
 
-    var song = document.createElement('li'); 
-    var song_list = document.querySelector('.song_items')
-
     var audio = new Audio()
     audio.setAttribute('controls','true')
     var dataurl = window.URL.createObjectURL(file)
     audio.src = dataurl
-    song.appendChild(audio)
-    song_list.appendChild(song)
+    // song.appendChild(audio)
+    // song_list.appendChild(song)
 
+    var duration_obj = {
+      "minutes": '',
+      "seconds": ''
+    }
     audio.addEventListener("canplay", function(){
       var duration=parseInt(audio.duration);
-      console.log(duration)
+      duration_obj.minutes = (Math.floor(duration/60))
+      duration_obj.seconds = (duration%60)
     });
 
     name.innerHTML = file.name; 
@@ -115,7 +158,7 @@ function filehandler(files) {
     li.appendChild(column)
     li.appendChild(progress)
     
-    var fileobj = {"file":file,"progress":progress};
+    var fileobj = {"file":file,"progress":progress,"duration":duration_obj};
 
     fileList.appendChild(li); 
 

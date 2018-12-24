@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./assets/jquery-filer.css">
   <link rel="stylesheet" href="./drop_zone.css">
+  <link rel="stylesheet" href="./edit_song.css">
 </head>
 
 <body>
@@ -20,13 +21,27 @@
   <main>
 
     <aside class="song_list">
+      <div class="list_title">
+        <p>歌曲列表</p>
+      </div>
       <ul class="song_items">
-
+        <li class="song_item">
+          <span class="no">1.</span>
+          <div class="song_title">众人划桨开大船</div>
+          <div class="info_wrapper">
+            <div class="song_singer">龚玥</div>
+            <div class="song_duration">03: 56</div>
+          </div>
+        </li>
       </ul>
+      <div class="switch_mode">
+        <div class="switch_bg"></div>
+        <p>添加歌曲</p>
+      </div>
     </aside>
 
     <div class="add_edit">
-      <div class="drop-container">
+      <!-- <div class="drop-container">
         <div class="droppable">
           <div class="drop-inner">
             <div class="icon-jfi-cloud-up-o"></div>
@@ -41,6 +56,29 @@
         <div class="upload-status">
             <ul class="upload-items"></ul>
         </div>
+      </div> -->
+
+      <div class="edit-container">
+        <div class="edit_inner">
+          <label>歌名
+            <input type="text" placeholder="">
+          </label>
+
+          <label>歌手
+            <input type="text" placeholder="">
+          </label>
+
+          <label>外链
+            <input type="text" placeholder="">
+          </label>
+
+          <div class="control_inner">
+            <div class="btn">
+                <input type="button" value="取消">
+                <input type="button" value="确认">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -48,9 +86,9 @@
   <script src="./lib/qiniu.min.js"></script>
   <script src="./lib/av-min.js"></script>
   <script src="./lib/jquery.min.js"></script>
+  <script src="./edit_song.js"></script>  
   <script src="./dropzone.js"></script>
   <script src="./filehandler.js"></script>
   <script src="main.js"></script>
-
 </body>
 </html>

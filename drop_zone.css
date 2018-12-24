@@ -8,6 +8,7 @@
   background: #fafbfd;
   border-radius: 6px;
   text-align: left;
+  overflow: hidden;
 }
 
 .drop-container .droppable{
@@ -21,7 +22,7 @@
   overflow: hidden;
 }
 .droppable *{
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
 }
 .droppable.dragover{
   opacity: 0.6;
@@ -136,6 +137,7 @@
 
 .upload-item .column-title{
   flex: 1;
+  max-width: 310px;
   padding-left: 16px;
   padding-right: 16px;
   color: #74809d;
