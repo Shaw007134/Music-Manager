@@ -1,3 +1,27 @@
+{/* <div class="edit-container">
+        <div class="edit_inner">
+          <label>歌名
+            <input type="text" placeholder="">
+          </label>
+
+          <label>歌手
+            <input type="text" placeholder="">
+          </label>
+
+          <label>外链
+            <input type="text" placeholder="">
+          </label>
+
+          <div class="control_inner">
+            <div class="btn">
+                <input type="button" value="取消">
+                <input type="button" value="确认">
+            </div>
+          </div>
+        </div>
+      </div> */}
+
+
 var li = document.querySelectorAll('.song_item')
 li = [...li]
 var switch_mode = document.querySelector('.switch_mode')
