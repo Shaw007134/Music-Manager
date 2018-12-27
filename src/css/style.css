@@ -85,6 +85,7 @@ aside .add_song{
   width: 100%;
   color: #fff;
   font-size: 16px;
+  /* font-weight: normal; */
   text-align: center;
   background: rgba(79,75,74,0.3) no-repeat;
   background-size: cover;
@@ -102,27 +103,29 @@ aside ul{
 }
 
 aside ul .song_item{
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin: 0;
+  /* padding-top: 15px; */
+  /* padding-bottom: 15px; */
+  /* margin: 0; */
   height: 50px;
   font-size: 14px;
   color: #dedede;
   display: flex;
+  flex-direction: row;
   align-items: center;
   border-bottom: 1px solid #A3A5A9;
-  line-height: 50px;
+  /* line-height: 50px; */
   cursor: pointer;
 }
 
-.song_item.selected{
-  background-color: #000;
+.active{
+  color: rgba(0,0,0)!important;
+  background-color: white!important;
   opacity: 0.5;
-  font-size: 15px;
+  font-weight: 700;
 }
 
 aside ul li .no{
-  display: block;
+  display: inline-block;
   padding-left: 20px;
   padding-right: 10px;
 }
@@ -132,7 +135,7 @@ aside ul li .song_title{
   flex: 1;
   text-align: left;
   font-size: 14px;
-  color: whitesmoke;
+  /* color: whitesmoke; */
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -180,7 +183,19 @@ main div.add_edit{
   }
 }
 
-.drop-container{
+
+.fadeOut{
+  animation: fade_out .5s ease;
+}
+@keyframes fade_out{
+  to{
+    height: 0;
+    opacity: 0;
+  }
+}
+
+
+.add-edit-container{
   display: block;
   max-width: 440px;
   width: 100%;
@@ -193,6 +208,66 @@ main div.add_edit{
   overflow: hidden;
 }
 
+.edit_inner{
+  display: flex;
+  background: #fff;
+  padding: 56px 0;
+  border: 2px dashed #C8C8CE;
+  border-radius: 6px;
+  flex-direction: column;
+  text-align: center;
+}
+
+.edit_inner label{
+  display: block;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.edit_inner label input[type=text]{
+  font: inherit;
+  padding-left: 5px;
+  border: 1px solid #C8C8CE;
+  border-radius: 5px;
+  outline: none;
+}
+
+
+.edit_inner .edit_button_container{
+  padding: 10px 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.edit_inner .edit_button_container div{
+  color: #008BFF;
+  font-size: 14px;
+  padding: 6px;
+  margin-right: 0px;
+  margin-left: 26px;
+  border: 1px solid #008BFF;
+  border-radius: 7px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.edit_inner .edit_button_container div:hover{
+  color: #fff;
+  background: #008BFF;
+}
+
+.edit_inner .edit_button_container div:last-child{
+  color: rgba(254,118,118,.8);
+  border: 1px solid rgba(254,118,118,.8);
+}
+
+.edit_inner .edit_button_container div:last-child:hover{
+  color: #fff;
+  background: rgba(254,118,118,.8);
+}
+
+
 .droppable{
   display: flex;
   background: #fff;
@@ -201,7 +276,6 @@ main div.add_edit{
   border-radius: 6px;
   flex-direction: column;
   text-align: center;
-  
   overflow: hidden;
 }
 .droppable *{
@@ -244,13 +318,15 @@ main div.add_edit{
   margin-bottom: 12px;
   line-height: 24px;
 }
+
+
+
 .browse-button{
   padding: 12px 18px;
   color: #008BFF;
   margin: 0 auto;
   border-radius: 6px;
   font-weight: 700;
-  /* vertical-align: middle; */
   border: 1px solid #008BFF;
   background-position: center;
   transition: all 0.3s ease;
@@ -271,6 +347,8 @@ main div.add_edit{
   padding: 0;
   /* margin-bottom: -16px; */
   text-align: left;
+  max-height: 220px;
+  overflow-y: auto;
 }
 
 .upload-item{
@@ -284,10 +362,11 @@ main div.add_edit{
 
 .fadeout{
   height: 0;
+  line-height: 0;
   padding: 0;
   margin: 0;
   opacity: 0;
-  transition: all 0.5s ease;
+  transition: all .5s ease;
 }
 
 .upload-item .item-column{
@@ -314,6 +393,7 @@ main div.add_edit{
 
 .upload-item .column-title{
   flex: 1;
+  max-width: 324px;
   padding-left: 16px;
   padding-right: 16px;
   color: #74809d;
@@ -411,3 +491,6 @@ main div.add_edit{
   font-size: 48px;
 }
 
+.hidden{
+  display: none;
+}

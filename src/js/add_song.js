@@ -1,23 +1,10 @@
-Array.prototype.indexOf = function(val) {
-  for (var i = 0; i < this.length; i++) {
-    if (this[i] == val) return i;
-  }
-  return -1;
-};
-Array.prototype.remove = function(val) {
-  var index = this.indexOf(val);
-  if (index > -1) {
-    this.splice(index, 1);
-  }
-};
-
 var file_array = []
 var process_array = []
 var max_queue = 2
 
 function createDropzone(){
   var drop_container = document.createElement('div')
-  drop_container.className="drop-container fadeIn"
+  drop_container.className="add-edit-container fadeIn"
   add_edit.appendChild(drop_container)
   var droppable = document.createElement('div')
   droppable.className = 'droppable'
@@ -134,13 +121,7 @@ function filehandler(files) {
     title.setAttribute('class','column-title')
     action.setAttribute('class','column-action')
 
-    var audio = new Audio()
-    audio.setAttribute('controls','true')
-    var dataurl = window.URL.createObjectURL(file)
-    audio.src = dataurl
-    // song.appendChild(audio)
-    // song_list.appendChild(song)
-
+    
     name.innerHTML = file.name; 
     size.innerHTML = (parseInt(file.size)/1024/1024).toFixed(2).toString()+' MB'
 
@@ -155,28 +136,8 @@ function filehandler(files) {
     li.appendChild(column)
     li.appendChild(progress)
 
-    var duration_time
-    var fileobj
-    audio.addEventListener("canplay", ()=>{
-      var duration=parseInt(audio.duration);
-      minutes = (Math.floor(duration/60))
-      seconds = duration%60
-      seconds = seconds>10?seconds:'0'+seconds
-      if(minutes>60){
-        hours = Math.floor(minutes/60)
-        hours = hours>10?hours:'0'+hours
-        minutes = minutes%60
-        minutes = minutes>10?minutes:'0'+minutes
-        duration_time = hours+":"+minutes+":"+seconds
-      }else{
-        minutes = minutes>10?minutes:'0'+minutes
-        duration_time = minutes+":"+seconds
-      }
-      fileobj['duration'] = duration_time
-    });
-
-    fileobj = {"file":file,"progress":progress,"duration":duration_time};
-
+    var fileobj = {"file":file,"progress":progress,"duration":''};
+    getDuration(fileobj)    
     fileList.appendChild(li); 
 
     file_array.push(fileobj)
@@ -184,12 +145,36 @@ function filehandler(files) {
   }
 }
 
+function getDuration(fileobj){
+  var audio = new Audio()
+  audio.setAttribute('controls','true')
+  var dataurl = window.URL.createObjectURL(fileobj["file"])
+  audio.src = dataurl
 
+  audio.addEventListener("canplay", ()=>{
+    var duration=parseInt(audio.duration)
+    window.URL.revokeObjectURL(dataurl)
+    minutes = (Math.floor(duration/60))
+    seconds = duration%60
+    seconds = seconds>10?seconds:'0'+seconds
+    if(minutes>60){
+      hours = Math.floor(minutes/60)
+      hours = hours>10?hours:'0'+hours
+      minutes = minutes%60
+      minutes = minutes>10?minutes:'0'+minutes
+      var duration_time = hours+":"+minutes+":"+seconds
+    }else{
+      minutes = minutes>10?minutes:'0'+minutes
+      var duration_time = minutes+":"+seconds
+    }
+    fileobj["duration"] = duration_time
+  });
+}
 
 function set_progress(){
   if(file_array.length>0){
-    console.log("file_array: " + file_array.length)
-    console.log("progress_array: " + process_array.length)
+    // console.log("file_array: " + file_array.length)
+    // console.log("progress_array: " + process_array.length)
     var file_array_length = file_array.length
     var process_array_length = process_array.length
     if(process_array_length <= max_queue){
@@ -214,14 +199,12 @@ function uploadFile(fileobj){
   if(name.indexOf('-')>0){
     var title = name.split('-')[1].replace(' ','').split('.')[0]
     var singer = name.split('-')[0].replace(' ','') 
-    console.log('title: '+title)
-    console.log('singer: '+singer)
   }
   fileobj['title'] = title
   fileobj['singer'] = singer 
   fileobj['size'] = size
+  fileobj['url'] = 'http://pjjtb28cj.bkt.clouddn.com/'+encodeURIComponent(name)
   var progressBar = fileobj["progress"]
-  console.log('执行了upload: ' + file)
   var xhr = new XMLHttpRequest(); 
   var upload = xhr.upload; 
   var formData = new FormData()
@@ -331,8 +314,6 @@ function uploadFile(fileobj){
   }
 
   function updateProgress(li,ul){
-    console.log('ul.scrollTop: ' + ul.scrollTop)
-    console.log('li.scrollTop: ' + li.offsetTop)
     ul.scrollTop = li.offsetTop - 175;
   }
 
