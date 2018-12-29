@@ -4,50 +4,145 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>音乐上传管理</title>
+  <title>首页</title>
   <link rel="stylesheet" href="./src/css/style.css">
-  <link rel="stylesheet" href="./assets/jquery-filer.css">
-  <link rel="stylesheet" href="./src/css/edit_song.css">
 </head>
-
 <body>
-  
-  <header>
-    <div class="header_bg"></div>
-    <p>音乐上传管理</p>
-  </header>
-  
-  <main>
+  <div class="wrap">
+    <header class="mod_header">
+      <i class="music_logo"></i>
+      <span href="javascript:;" class="btn-download">下载APP</span>
+    </header>
 
-    <aside class="song_list">
-      <div class="list_title">
-        <p>歌曲列表</p>
-      </div>
-      <ul class="song_items">
-        <!-- <li class="song_item">
-          <span class="no">1.</span>
-          <div class="song_title">众人划桨开大船</div>
-          <div class="info_wrapper">
-            <div class="song_singer">龚玥</div>
-            <div class="song_duration">03: 56</div>
+    <nav class="mod_nav">
+      <a href="" data-nav="">推荐</a>
+      <a href="" data-nav="">排行榜</a>
+      <a href="" data-nav="">搜索</a>
+    </nav>
+
+    <div id="content-wrapper">
+      <div id="recom_wrap" class="current_page_loaded">
+        <div class="slides-container" id="slides-container">
+          <div class="slides" id="slides">
+            <div id="slide">
+              <a href="">
+                <img src="../../assets/img/tj-slider/1.jpg" alt="">
+              </a>
+            </div>
+            <div id="slide">
+              <a href="">
+                <img src="../../assets/img/tj-slider/2.jpg" alt="">
+              </a>
+            </div>
+            <div id="slide">
+              <a href="">
+                <img src="../../assets/img/tj-slider/3.jpg" alt="">
+              </a>
+            </div>
+            <div id="slide">
+              <a href="">
+                <img src="../../assets/img/tj-slider/4.jpg" alt="">
+              </a>
+            </div>
+            <div id="slide">
+              <a href="">
+                <img src="../../assets/img/tj-slider/5.jpg" alt="">
+              </a>
+            </div>
           </div>
-        </li> -->
-      </ul>
-      <div class="add_song">
-        <div class="add_bg"></div>
-        <div class="add">添加歌曲</div>
+          <div id="slides-buttons" class="slides-buttons"></div>
+          <a href="javascript:;" class="arrow slides-prev" id="slides-prev">&lt;</a>
+          <a href="javascript:;" class="arrow slides-next" id="slides-next">&gt;</a>
+        </div>
+
+        <div class="mod_threecol_list mod_threecol_list_special">
+          <h2 class="list_title">推荐歌单</h2>
+          <ul id="songlist_wrapper" class="list_container">
+            <li data-tjname="recom_songlist">
+              <a href="" class="list_main" data-href="">
+                <span class="list_media">
+                  <img src="" alt="">
+                  <span class="listen_count"><i class="icon icon_listen"></i></span>
+                  <span class="icon icon_play"></span>
+                </span>
+                <span class="list_info">
+                  <h3 class="list_tit"></h3>
+                  <p class="list_text"></p>
+                </span>
+              </a>
+            </li>
+            <li data-tjname="recom_songlist">
+              <a href="" class="list_main" data-href="">
+                <span class="list_media">
+                  <img src="" alt="">
+                  <span class="listen_count"><i class="icon icon_listen"></i></span>
+                  <span class="icon icon_play"></span>
+                </span>
+                <span class="list_info">
+                  <h3 class="list_tit"></h3>
+                  <p class="list_text"></p>
+                </span>
+              </a>
+            </li>
+            <li data-tjname="recom_songlist">
+              <a href="" class="list_main" data-href="">
+                <span class="list_media">
+                  <img src="" alt="">
+                  <span class="listen_count"><i class="icon icon_listen"></i></span>
+                  <span class="icon icon_play"></span>
+                </span>
+                <span class="list_info">
+                  <h3 class="list_tit"></h3>
+                  <p class="list_text"></p>
+                </span>
+              </a>
+            </li>
+            <li data-tjname="recom_songlist">
+              <a href="" class="list_main" data-href="">
+                <span class="list_media">
+                  <img src="" alt="">
+                  <span class="listen_count"><i class="icon icon_listen"></i></span>
+                  <span class="icon icon_play"></span>
+                </span>
+                <span class="list_info">
+                  <h3 class="list_tit"></h3>
+                  <p class="list_text"></p>
+                </span>
+              </a>
+            </li>
+            <li data-tjname="recom_songlist">
+              <a href="" class="list_main" data-href="">
+                <span class="list_media">
+                  <img src="" alt="">
+                  <span class="listen_count"><i class="icon icon_listen"></i></span>
+                  <span class="icon icon_play"></span>
+                </span>
+                <span class="list_info">
+                  <h3 class="list_tit"></h3>
+                  <p class="list_text"></p>
+                </span>
+              </a>
+            </li>
+            <li data-tjname="recom_songlist">
+              <a href="" class="list_main" data-href="">
+                <span class="list_media">
+                  <img src="" alt="">
+                  <span class="listen_count"><i class="icon icon_listen"></i></span>
+                  <span class="icon icon_play"></span>
+                </span>
+                <span class="list_info">
+                  <h3 class="list_tit"></h3>
+                  <p class="list_text"></p>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </aside>
-
-    <div class="add_edit">
     </div>
+  </div>
 
-  </main>
-
-  <script src="./lib/qiniu.min.js"></script>
-  <script src="./lib/av-min.js"></script>
-  <script src="./src/js/add_song.js"></script>
-  <script src="./src/js/edit_song.js"></script>
-  <script src="./src/js/init.js"></script>  
+  <script src="./lib/jquery-3.3.1.min.js"></script>
+  <script src="./src/js/index.js"></script>
 </body>
 </html>

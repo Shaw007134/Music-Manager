@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>音乐上传管理</title>
+  <link rel="stylesheet" href="./src/css/admin.css">
+  <link rel="stylesheet" href="./assets/jquery-filer.css">
+  <link rel="stylesheet" href="./src/css/edit_song.css">
+</head>
+
+<body>
+  
+  <header>
+    <div class="header_bg"></div>
+    <p>音乐上传管理</p>
+  </header>
+  
+  <main>
+
+    <aside class="song_list">
+      <div class="list_title">
+        <p>歌曲列表</p>
+      </div>
+      <ul class="song_items">
+      </ul>
+      <div class="add_song">
+        <div class="add_bg"></div>
+        <div class="add">添加歌曲</div>
+      </div>
+    </aside>
+
+    <div class="add_edit">
+    </div>
+
+  </main>
+
+  <script src="./lib/qiniu.min.js"></script>
+  <script src="./lib/av-min.js"></script>
+  <script src="./src/js/add_song.js"></script>
+  <script src="./src/js/edit_song.js"></script>
+  <script src="./src/js/init.js"></script>  
+</body>
+</html>
