@@ -1,26 +1,27 @@
 {
   let view = {
     el: 'div.mod_song_list',
+    template: `
+      <a href="./song.html?id={song.id}" class="sgitem">
+      <div class="item_container">
+        <div class="title">{song.title}</div>
+        <div class="singer"><i class="sq"></i>{song.singer}</div>
+      </div>
+      <div class="item_play"><div class="icon_play"></div></div>
+    </a>
+    `
+    ,
     init(){
       this.$el = $(this.el)
     },
     render(data){
-      console.log('render')
       let {songs} = data
-      console.log(songs)
-      
       songs.map((song)=>{
-        console.log(song)
-        let $a = $(`
-          <a href="" class="sgitem">
-            <div class="item_container">
-              <div class="title">${song.title}</div>
-              <div class="singer"><i class="sq"></i>${song.singer}</div>
-            </div>
-            <div class="item_play"><div class="icon_play"></div></div>
-          </a>
-        `)
-        console.log(1)
+        let $a = $(this.template
+          .replace('{song.title}',song.title)
+          .replace('{song.singer}',song.singer)
+          .replace('{song.id}',song.id)
+        )
         this.$el.find('div.sglst').append($a)
       })
     }

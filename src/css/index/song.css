@@ -28,7 +28,7 @@ body, button, input, keygen, legend, select, textarea {
 }
 
 .m-song-bg{
-  background: url(../../assets/img/1.png) no-repeat;
+  background: url(../../../assets/img/1.png) no-repeat;
   background-position: 50%;
   background-size: auto 100%;
   transform: scale(1.5);
@@ -149,7 +149,7 @@ transition-duration: 0ms; */
   z-index: 5;
   width: 84px;
   height: 122px;
-  background: url(../../assets/img/needle-plus.png) no-repeat;
+  background: url(../../../assets/img/needle-plus.png) no-repeat;
   background-size: contain;
 }
 
@@ -176,7 +176,7 @@ transition-duration: 0ms; */
   top: 0;
   bottom: 0;
   z-index: 2;
-  background: url(../../assets/img/disc-plus.png) no-repeat;
+  background: url(../../../assets/img/disc-plus.png) no-repeat;
   background-size: contain;
 }
 
@@ -185,7 +185,7 @@ transition-duration: 0ms; */
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  background: url(../../assets/img/disc_default.png) no-repeat;
+  background: url(../../../assets/img/disc_default.png) no-repeat;
   background-size: contain;
 }
 
@@ -231,7 +231,7 @@ transition-duration: 0ms; */
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
   z-index: 10;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAACoCAMAAABDlVWGAAABJlBMV…ZR1LrPmQ0hKZfSXC7Fzr5LeD7uGoYBQBCGV56PS2g5ewGy+NkUNbjr9gAAAABJRU5ErkJggg==) 0 0 no-repeat;
+  background: url() 0 0 no-repeat;
   background-size: contain;
 }
 
