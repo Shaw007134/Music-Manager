@@ -18,7 +18,6 @@ var song_items = document.querySelector('.song_items')
 
 var APP_ID = 'vQLSvBdTgnXTooYhaS52sJeg-gzGzoHsz';
 var APP_KEY = 'Xj9qAEQtQyM9bfc52opYGDKN';
-var token = ''
 
 AV.init({
   appId: APP_ID,
@@ -27,7 +26,7 @@ AV.init({
 
 var Song = AV.Object.extend('Song');
 
-
+var token = ''
 function getToken(){
   var xhr = new XMLHttpRequest()
   xhr.open('GET','http://47.104.228.220:3000/uptoken')
