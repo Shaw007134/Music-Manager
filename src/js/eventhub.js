@@ -1,4 +1,4 @@
-window.eventhub = {
+window.eventHub = {
   events:{
 
   },

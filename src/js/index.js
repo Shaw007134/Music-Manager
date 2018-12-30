@@ -10,7 +10,6 @@ var playOptions = {
 window.onload = function() {
   var slides = document.getElementById('slides')
   var slide = slides.querySelectorAll('#slide')
-  console.log(slide)
   var firstCopy = slide[0].cloneNode(true)
   var lastCopy = slide[slide.length-1].cloneNode(true)
   slides.insertBefore(lastCopy,slides.firstChild)
@@ -23,15 +22,10 @@ window.onresize = function() {
     carousel(playOptions, 2000);
 };
 
-document.addEventListener('visibilitychange',function(){
-  if(document.hidden){
-    clearInterval(playOptions.timer);
-  }else{
-    carousel(playOptions, 2000);
-  }
-})
+
 
 var current = 0
+
 
 function carousel(option, interval) {
   var $ = function(ele) {
@@ -57,15 +51,16 @@ function carousel(option, interval) {
     height = parseInt((img[0].height));
     // 宽度随视窗自适应
     slides.style.left = -width + 'px';
-    slides.style.width = width * len + 'px';
+    slides.style.width = width * img.length + 'px';
     // 高度随图片自适应
     slides_container.style.height = height + 'px';
     slides.style.height = height + 'px';
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < img.length; i++) {
       img[i].style.width = parseInt(width) + 'px';
     }
   }
   responseInit();
+  
   var size = parseInt(len - 2);
   var btns = document.createDocumentFragment();
   for (var i = 0; i < size; i++) {
@@ -124,7 +119,7 @@ function carousel(option, interval) {
         }, 1500);
       }
 
-      slides.style.transition = 'all 1.5s';
+      slides.style.transition = 'all 1s';
       slides.style.left = newLeft + 'px';
       current = index
       showButtons(index)
@@ -158,9 +153,11 @@ function carousel(option, interval) {
     }, interval);
   }
 
+  
+
   function stop() {
     clearInterval(option.timer);
-    console.log(animated)
+    console.log('轮播暂停')
   }
   play();
 
@@ -168,5 +165,24 @@ function carousel(option, interval) {
 
   slides_container.onmouseout = play;
 
-  window.addEventListener('resize', responseInit, false);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){
+      stop();
+    }else{
+      play();
+    }
+  })
+
+  window.eventHub.on('selectNav',(navName)=>{
+    if(navName === 'recom_wrap'){
+      play()
+    }else{
+      stop()
+    }
+  })
+
+  function resizeListener(){
+    responseInit();
+  }
+  window.addEventListener('resize', resizeListener, false);
 }

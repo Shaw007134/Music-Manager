@@ -7,6 +7,14 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
+ul,li{
+  list-style: none;
+}
+
 body {
   font: 12px/1.5 "hiragino sans gb",arial;
   color: #555;
@@ -74,11 +82,29 @@ body {
   color: #31c27c;
 }
 
+.mod_nav a.current:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #31c27c;
+}
+
+.recom_wrap,
+.toplist_wrap,
+.search_wrap{
+  display: none;
+}
+
+.active{
+  display: block;
+}
 
 .slides-container {
-  /* 自适应样式 */
   width: 100%;
-  /* 高度初始值 可以设置也可以去掉 */
   /* height: 2.87rem; */
   border: none;
   overflow: hidden;
@@ -88,16 +114,12 @@ body {
 .slides {
   position: absolute;
   z-index: 1;
-  /* 添加过度属性 */
-  transition: all 1.5s
+  transition: all 1s ease-in;
 }
 .slides img {
   float: left;
-  /* 自适应宽度 */
   width: 100%;
-  /* 高度初始值设置auto 则为图片原始值高度 100%则为容器高度，同样可以不设置 为保持兼容性 设置为佳 */
   height: auto;
-  /* height: 200px; */
   max-width: 100%;
 }
 
@@ -116,8 +138,6 @@ body {
 .slides-buttons span {
   cursor: pointer;
   float: left;
-  /* display: inline-block; */
-  /* border: 1px solid #fff; */
   width: .5em;
   height: .5em;
   margin-right: .5em;
@@ -135,9 +155,8 @@ body {
   display: none;
   color: #fff;
   text-align: center;
-  font-weight: bold;
+  font-weight: 400;
   position: absolute;
-  /* 垂直居中 */
   top: 50%;
   transform: translateY(-50%);
   width: 50px;
@@ -145,11 +164,6 @@ body {
   line-height: 50px;
   border-radius: 50%;
   font-size: 42px;
-  /* 不垂直居中 占满高度 */
-  /* width: .6rem;
-  font-size: .6rem;
-  height: 100%;
-  vertical-align: middle; */
   background-color: rgba(0, 0, 0, .4);
   z-index: 2;
 }
@@ -163,10 +177,274 @@ body {
 
 .slides-prev {
   left: 2%;
-  /* left: 0; */
 }
 
 .slides-next {
   right: 2%
-  /* right: 0; */
 }
+
+.mod_twocol_list {
+  margin-top: 7px;
+  padding-bottom: 22px;
+}
+
+/* .mod_twocol_list */
+.list_title {
+  font-size: 16px;
+  padding-left: 9px;
+  color: #000;
+  margin-bottom: 11px;
+  font-weight: 400;
+  position: relative;
+}
+
+/* .mod_twocol_list */
+.list_title:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -9px;
+  width: 2px;
+  height: 16px;
+  background-color: #31c27c;
+}
+
+.mod_twocol_list
+.list_container {
+  overflow: hidden;
+  margin-right: -8px;
+}
+
+.mod_twocol_list li{
+  float: left;
+  width: 33%;
+  padding-right: .7%;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.mod_twocol_list li
+.list_main{
+  display: block;
+  background: #fff;
+}
+
+.mod_twocol_list li
+.list_media{
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.mod_twocol_list li
+.list_media::before{
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.mod_twocol_list li
+.list_media::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 42px;
+  z-index: 2;
+  background-image: url(../../assets/img/gd/shadow_rp.png);
+  background-size: 1px 42px;
+  background-repeat: repeat-x;
+}
+
+/* .clearfix::after{
+  content: '';
+  clear: both;
+  display: block;
+} */
+
+.mod_twocol_list li
+.list_media img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  /* height: auto; */
+  z-index: 1;
+}
+
+.mod_twocol_list li .list_media .listen_count {
+  left: 5px;
+  bottom: 7px;
+  display: block;
+  line-height: 12px;
+  color: #fff;
+  position: absolute;
+  z-index: 10;
+}
+
+.mod_twocol_list li .list_media .icon_listen {
+  display: block;
+  float: left;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  background-image: url(../../assets/img/favico.png);
+  background-repeat: no-repeat;
+  background-size: 24px 60px;
+  background-position: 0 -50px;
+}
+
+.mod_twocol_list li .list_media .icon_play {
+  height: 24px;
+  bottom: 5px;
+  right: 5px;
+  width: 24px;
+  background-image: url(../../assets/img/favico.png);
+  background-repeat: no-repeat;
+  background-size: 24px 60px;
+  background-position: 0 0;
+  position: absolute;
+  display: block;
+  z-index: 10;
+}
+
+.mod_twocol_list li .list_info {
+  padding: 0 7px 5px;
+  color: #000;
+  /* border: 1px solid red; */
+}
+
+.mod_twocol_list li .list_info .list_tit,
+.mod_twocol_list li .list_info .list_text,
+.singer,.title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal;
+  /* border: 1px solid black; */
+}
+
+.mod_twocol_list li .list_info .list_tit{
+  font-size: 14px;
+}
+
+.mod_twocol_list li .list_info .list_text{
+  font-size: 12px;
+}
+
+.mod_song_list{
+  margin-top: 7px;
+  /* padding-bottom: 22px; */
+}
+
+.mod_song_list
+.sgitem{
+  display: flex;
+  padding-left: 10px;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+}
+
+.sgitem::after{
+  position: absolute;
+  z-index: 2;
+  content: "";
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  transform-origin: top left;
+  transform: scale(.5);
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  width: 200%;
+  height: 200%;
+}
+.mod_song_list
+.sgitem .item_container{
+  padding: 6px 0;
+  width: 0;
+  flex: 1 1 auto;
+}
+
+.sgitem .title{
+  font-size: 14px;
+}
+
+.sgitem .singer{
+  font-size: 12px;
+  color: #888;
+}
+
+.sgitem .singer
+.sq{
+  display: inline-block;
+  width: 12px;
+  height: 8px;
+  margin-right: 4px;
+  background: url(../../assets/img/favico2.png) no-repeat;
+  background-size: 166px 97px;
+}
+
+.sgitem .item_play{
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.sgitem .item_play
+.icon_play{
+  background: url(../../assets/img/favico2.png) no-repeat;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-position: -24px 0;
+  background-size: 166px 97px;
+}
+
+.mod_footer{
+  position: relative;
+  padding-top: 53.3%;
+  margin-top: 4px;
+  background: url(../../assets/img/bg2.png) no-repeat;
+  background-size: contain;
+}
+
+.footer_wrapper{
+ position: absolute;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ top: 0;
+ z-index: 1;
+ text-align: center; 
+}
+
+.footer_wrapper .logo{
+  padding-top: 16.9%;
+}
+
+.footer_wrapper .logo svg{
+  display: block;
+  margin: 0 auto;
+  width: 230px;
+  height: 44px;
+}
+.footer_wrapper .openapp{
+  line-height: 38px;
+  border: 1px solid #31c27c;
+  border-radius: 38px;
+  font-size: 16px;
+  color: #31c27c;
+  margin: 15px 37px 5px;
+}
+
+.footer_wrapper .copyright{
+  color: #888;
+  font-size: 12px;
+  line-height: 16px;
+  transform: scale(.75);
+}
+

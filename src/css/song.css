@@ -1,0 +1,252 @@
+body{
+  background-color: #fff;
+  background-size: 100% 100%;
+  overflow: auto;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+body, button, input, keygen, legend, select, textarea {
+  font: 14px/1.5 Helvetica,sans-serif;
+  color: #333;
+  outline: 0;
+}
+
+.u-height{
+  height: 100%;
+}
+
+.m-newsong{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 320px;
+  overflow: hidden;
+}
+
+.m-song-bg{
+  background: url(../../assets/img/1.png) no-repeat;
+  background-position: 50%;
+  background-size: auto 100%;
+  transform: scale(1.5);
+  transform-origin: center top;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+  transition: opacity .3 linear;
+  z-index: -1;
+  opacity: 1;
+}
+
+.m-song-bg:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0,0,0,.5);
+}
+
+.m-scroll_wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  overflow: hidden;
+  z-index: 21;
+}
+
+/* transform: translate(0px, -1312px) translateZ(0px);
+transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+transition-duration: 0ms; */
+
+.m-scroll_scroller_vertical{
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-height: 100%;
+  width: 100%;
+}
+
+.m-song_newfst{
+  height: 550px;
+  position: relative;
+  padding-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.m-logo{
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  display: block;
+  height: 17px;
+  line-height: 0;
+}
+
+@media screen and (min-width: 414px){
+  .m-song-wrap {
+      padding-top: 80px;
+  }
+  .m-song-disc {
+    width: 342px;
+    height: 342px;
+  }
+  .m-song-rollwrap {
+    width: 212px;
+    height: 212px;
+    margin: -106px 0 0 -106px;
+  }
+  .m-song-plybtn {
+    width: 65px;
+    height: 65px;
+    background-image: url(//s3.music.126.net/m/s/img/play_btn_3x.png?4da7e13…);
+  }
+}
+
+@media screen and (min-width: 360px){
+  .m-song-wrap {
+      padding-top: 70px;
+  }
+  .m-song-disc {
+    width: 296px;
+    height: 296px;
+  }
+  .m-song-rollwrap {
+    width: 184px;
+    height: 184px;
+    margin: -92px 0 0 -92px;
+  }
+  .m-song-plybtn {
+    width: 56px;
+    height: 56px;
+  }
+}
+.m-song-wrap {
+    padding-top: 63px;
+}
+
+.m-song-disc {
+  position: relative;
+  width: 248px;
+  height: 248px;
+  margin: 0 auto;
+}
+
+.m-song-disc:after {
+  content: " ";
+  position: absolute;
+  top: -63px;
+  left: 107px;
+  z-index: 5;
+  width: 84px;
+  height: 122px;
+  background: url(../../assets/img/needle-plus.png) no-repeat;
+  background-size: contain;
+}
+
+.m-song-turn{
+  width: 100%;
+  height: 100%;
+}
+
+.m-song-rollwrap{
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  margin: -75px 0 0 -75px;
+}
+
+.m-song-turn:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  background: url(../../assets/img/disc-plus.png) no-repeat;
+  background-size: contain;
+}
+
+.m-song-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: url(../../assets/img/disc_default.png) no-repeat;
+  background-size: contain;
+}
+
+.a-circling{
+  animation: circling 20s infinite linear
+}
+
+@keyframes circling{
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.u-img{
+  width: 100%;
+  vertical-align: middle;
+  border: 0;
+}
+
+.m-song-lgour, .m-song-light {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+}
+
+.a-circling.z-pause {
+  animation-play-state: paused;
+}
+
+.m-song-plybtn {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  z-index: 10;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAACoCAMAAABDlVWGAAABJlBMV…ZR1LrPmQ0hKZfSXC7Fzr5LeD7uGoYBQBCGV56PS2g5ewGy+NkUNbjr9gAAAABJRU5ErkJggg==) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.m-song-plybtn:after {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+.m-song-clickarea {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 52px;
+  z-index: 10;
+}
+
