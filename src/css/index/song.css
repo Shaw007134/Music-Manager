@@ -28,20 +28,24 @@ body, button, input, keygen, legend, select, textarea {
 }
 
 .m-song-bg{
-  background: url(../../../assets/img/1.png) no-repeat;
-  background-position: 50%;
-  background-size: auto 100%;
-  transform: scale(1.5);
-  transform-origin: center top;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   height: 100%;
   overflow: hidden;
-  transition: opacity .3 linear;
-  z-index: -1;
   opacity: 1;
+  background-image: url(../../../assets/img/1.png);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  filter: blur(5px);
+  /* background-position: 50%; 
+  background-size: auto 100%;
+  transform: scale(1.5);
+  transform-origin: center top;
+  transition: opacity .3s linear;*/
+  z-index: -1; 
 }
 
 .m-song-bg:after {
@@ -167,7 +171,7 @@ transition-duration: 0ms; */
   animation: circling 20s infinite linear
 }
 
-.a-circling.z-pause {
+.a-circling.paused {
   animation-play-state: paused;
 }
 

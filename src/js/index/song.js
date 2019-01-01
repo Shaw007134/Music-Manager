@@ -1,68 +1,82 @@
 
 {
   let view = {
-    el:'.m-song-clickarea',
-    template:`
-      <audio controls src={{url}}></audio>
-      <div>
-        <button class="play">播放</button>
-        <button class="pause">暂停</button>
-
-      </div>
-    `,
+    el:'.m-newsong',
+    init(){
+      this.$el = $(this.el)
+    },
     render(data){
-      $(this.el).html(this.template.replace('{{url}}',data.url))
+      let {song,status,load} = data
+      console.log(load)
+      if(!load){
+        console.log('load: '+load)
+        this.$el.find('.m-song-bg').css('background-image',`url(${song.cover})`)
+        this.$el.find('img').attr('src',`${song.cover}`)
+        this.$el.find('.m-song-clickarea').html(`<audio src=${song.url} autoplay></audio>`)
+      }
+      if(status === 'paused'){
+        this.$el.find('.m-song-plybtn').css('display','block')
+        this.$el.find('.a-circling').addClass('paused')
+        console.log('pause')
+        this.pause()
+      }else{
+        this.$el.find('.m-song-plybtn').css('display','none')
+        this.$el.find('.a-circling').removeClass('paused')
+        console.log('play')
+        this.play()
+      }
     },
     play(){
-      let audio = $(this.el).find('audio')[0]
-      audio.play()
+      this.$el.find('audio')[0].play()
     },
     pause(){
-      let audio = $(this.el).find('audio')[0]
-      audio.pause()
+      this.$el.find('audio')[0].pause()
     }
   }
-  let model = {
-    data:{
-      id: '',
-      name: '',
-      singer: '',
-      url: ''
-    },
-    get(id){
-      var APP_ID = 'vQLSvBdTgnXTooYhaS52sJeg-gzGzoHsz';
-      var APP_KEY = 'Xj9qAEQtQyM9bfc52opYGDKN';
 
-      AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY
-      })
+  let model = {
+    data: {
+      song: {
+        id: '',
+        title: '',
+        singer: '',
+        url: '',
+        cover: ''
+      },
+      status: '',
+      load: false
+    },
+
+    get(id){
       var query = new AV.Query('Song')
       return query.get(id).then((object)=>{
-        Object.assign(this.data,{id:object.id,...object.attributes})
+        Object.assign(this.data.song,{id:object.id,...object.attributes})
         return object
       })
     }
   }
+
   let controller = {
     init(view,model){
       this.view = view
+      this.view.init()
       this.model = model
       let id = this.getSongId()
       this.model.get(id).then(()=>{
-        // this.view.render(this.model.data)
-        // setTimeout(()=>{
-        //   this.view.play()
-        // },3000) 这里Chrome会出错
+        this.view.render(this.model.data)
+        this.model.data.load = true
       })
-      // this.bindEvents()
+      this.bindEvents()
     },
     bindEvents(){
-      $(this.view.el).on('click','.play',()=>{
-        this.view.play()
-      })
-      $(this.view.el).on('click','.pause',()=>{
-        this.view.pause()
+      this.view.$el.on('click','.m-song_newfst',()=>{
+        if(this.model.data.status === ''){
+          this.model.data.status = 'paused'
+          this.view.render(this.model.data)
+        }else{
+          this.model.data.status = ''
+          this.view.render(this.model.data)
+        }
       })
     },
     getSongId(){

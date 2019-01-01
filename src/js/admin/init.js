@@ -16,14 +16,6 @@ var add_song = document.querySelector('.add_song')
 var song_items = document.querySelector('.song_items')
 
 
-var APP_ID = 'vQLSvBdTgnXTooYhaS52sJeg-gzGzoHsz';
-var APP_KEY = 'Xj9qAEQtQyM9bfc52opYGDKN';
-
-AV.init({
-  appId: APP_ID,
-  appKey: APP_KEY
-});
-
 var Song = AV.Object.extend('Song');
 
 var token = ''
@@ -51,7 +43,6 @@ function song_list(){
 
 function song_find(item,callback){
   var query = new AV.Query('Song')
-  console.log(item['title'])
   query.find().then(function(objects){
     for(var i=0; i<objects.length; i++){
       var object = objects[i]
@@ -110,10 +101,10 @@ function song_save(fileobj){
     singer: fileobj["singer"]|| '未知',
     duration: fileobj["duration"] || '',
     size: fileobj["size"],
-    url:fileobj["url"]
+    url:fileobj["url"],
+    cover: ''
   }).then(function(object) {
-    // console.log(object)
-    console.log(fileobj)
+    console.log(fileobj["title"]+'保存成功')
   })
 }
 

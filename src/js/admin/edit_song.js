@@ -19,6 +19,8 @@ function edit_song(song,fileobj){
   var title = fileobj["title"]
   var singer = fileobj["singer"]
   var link = fileobj["url"]
+  var cover = fileobj["cover"] || ""
+  console.log(cover)
   var add_song = document.querySelector('.add_song')
   var edit_song = document.querySelector('.edit_inner')
   if(edit_song === null){
@@ -49,8 +51,16 @@ function edit_song(song,fileobj){
     input_link.setAttribute('type','text')
     input_link.setAttribute('class','edit_input')
     input_link.value = link
-    edit_link.innerHTML = '链接: '
+    edit_link.innerHTML = '歌曲链接: '
     edit_link.appendChild(input_link)
+
+    var edit_cover = document.createElement('label')
+    var cover_link = document.createElement('input')
+    cover_link.setAttribute('type','text')
+    cover_link.setAttribute('class','edit_input')
+    cover_link.value = cover
+    edit_cover.innerHTML = '封面链接: '
+    edit_cover.appendChild(cover_link)
 
     var edit_button_container = document.createElement('div')
     var edit_button = document.createElement('div')
@@ -68,6 +78,7 @@ function edit_song(song,fileobj){
     edit_inner.appendChild(edit_name)
     edit_inner.appendChild(edit_singer)
     edit_inner.appendChild(edit_link)
+    edit_inner.appendChild(edit_cover)
     edit_inner.appendChild(edit_button_container)
 
     edit_container.appendChild(edit_inner)
@@ -78,6 +89,7 @@ function edit_song(song,fileobj){
     edit_input[0].value = title
     edit_input[1].value = singer
     edit_input[2].value = link
+    edit_input[3].value = cover
   }
 
   document.querySelector('.edit_button').outerHTML = document.querySelector('.edit_button').outerHTML
@@ -91,7 +103,7 @@ function edit_song(song,fileobj){
     update_song_list(song)
   }
   function remove_listener(){
-    // remove_song_db(fileobj)
+    remove_song_db(fileobj)
     remove_song_list(song)
   }
   edit_btn.addEventListener('click',edit_listener)
@@ -106,7 +118,6 @@ function remove_song_db(item){
   song_find(item,remove_callback)
 }
 function remove_song_list(song){
-  // song.classList.remove('fadeIn')
   song.classList.add('fadeOut')
   var edit_item = document.querySelectorAll('.edit_input')
   for(var i=0;i<edit_item.length;i++){
@@ -132,6 +143,7 @@ function edit_callback(id){
   item.set('title',edit_item[0].value)
   item.set('singer',edit_item[1].value)
   item.set('url',edit_item[2].value)
+  item.set('cover',edit_item[3].value)
   item.save()
 }
 function remove_callback(id){

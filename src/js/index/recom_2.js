@@ -31,13 +31,6 @@
       songs: []
     },
     find(){
-      var APP_ID = 'vQLSvBdTgnXTooYhaS52sJeg-gzGzoHsz';
-      var APP_KEY = 'Xj9qAEQtQyM9bfc52opYGDKN';
-
-      AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY
-      });
       var query = new AV.Query('Song')
       return query.find().then((objects)=>{
         this.data.songs = objects.map(object=>{
