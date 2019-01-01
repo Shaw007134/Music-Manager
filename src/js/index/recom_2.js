@@ -34,7 +34,14 @@
       var query = new AV.Query('Song')
       return query.find().then((objects)=>{
         this.data.songs = objects.map(object=>{
-          return {id: object.id, ...object.attributes}
+          var song = {id:object.id}
+          for (const key of Object.keys(object.attributes)){
+            song[key] = object.attributes[key]
+          }
+          return song
+          // return {id: object.id, ...object.attributes}
+        //edge, ie不支持...写法，object property rest syntax
+
         })
         return objects
       })

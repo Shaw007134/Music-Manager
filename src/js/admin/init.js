@@ -102,7 +102,8 @@ function song_save(fileobj){
     duration: fileobj["duration"] || '',
     size: fileobj["size"],
     url:fileobj["url"],
-    cover: ''
+    cover: '',
+    lyric: ''
   }).then(function(object) {
     console.log(fileobj["title"]+'保存成功')
   })

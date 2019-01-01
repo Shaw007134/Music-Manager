@@ -7,6 +7,15 @@ body{
   margin: 0;
   padding: 0;
 }
+i{
+  font-style: normal;
+}
+a{
+  text-decoration: none;
+}
+ul,li{
+  list-style: none;
+}
 body, button, input, keygen, legend, select, textarea {
   font: 14px/1.5 Helvetica,sans-serif;
   color: #333;
@@ -233,6 +242,114 @@ transition-duration: 0ms; */
   z-index: 10;
 }
 
+.m-song-info {
+  padding: 0 35px;
+  margin-top: 25px;
+}
+
+.m-song-h2 {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.1;
+  color: #fefefe;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+
+.m-song-autr {
+  font-size: 13px;
+  color: hsla(0,0%,100%,.6);
+}
+
+.m-song-lrc {
+  position: relative;
+  margin-top: 14px;
+}
+
+.m-song-scroll{
+  height: 24px;
+  line-height: 1.5;
+  font-size: 13px;
+  /* height: 72px; */
+  overflow: hidden;
+  text-align: center;
+  color: hsla(0,0%,100%,.6);
+}
+
+.lrc-current{
+  color: rgb(255,255,255)
+}
+
+.m-link, .m-guide{
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.m-link {
+  color: hsla(0,0%,100%,.6);
+  height: 30px;
+  line-height: 30px;
+  bottom: 18px;
+}
+
+.m-guide {
+  height: 36px;
+  padding-top: 10px;
+  bottom: -14px;
+}
+
+.m-guide .arr {
+  display: block;
+  width: 17px;
+  height: 12px;
+  background-repeat: no-repeat;
+  background-size: 17px auto;
+  background-image: url(../../../assets/img/download.png);
+  background-position: 0 0;
+}
+
+.m-guide .arr.ani {
+  animation: shining 1.2s steps(1) infinite;
+}
+
+.m-song-lritem.active{
+  color: rgb(255,255,255)
+}
+
+@keyframes shining{
+  0% {
+    background-position: 0 0;
+  }
+  15% {
+      background-position: 0 -12px;
+  }
+  30% {
+      background-position: 0 -24px;
+  }
+  45% {
+      background-position: 0 -36px;
+  }
+  60% {
+      background-position: 0 -48px;
+  }
+  75% {
+      background-position: 0 -60px;
+  }
+  90% {
+      background-position: 0 -72px;
+  }
+  100% {
+      background-position: 0 -84px;
+  }
+
+}
+
 @media screen and (min-width: 360px){
   .m-song-wrap {
       padding-top: 70px;
@@ -263,6 +380,18 @@ transition-duration: 0ms; */
   .m-song-plybtn {
     width: 56px;
     height: 56px;
+  }
+}
+
+@media screen and (min-width: 375px){
+  .m-song-h2 {
+      font-size: 18px;
+  }
+  .m-song-autr, .m-song-pure {
+    font-size: 16px;
+  }
+  .m-song-scroll{
+    font-size: 16px;
   }
 }
 
@@ -298,5 +427,22 @@ transition-duration: 0ms; */
     height: 65px;
     background-image: url(../../../assets/img/plybtn-plus.png);
   }
+  .m-song-info{
+    margin-top: 15px;
+  }
+  .m-song-lrc{
+    margin-top: 6px;
+  }
 }
+
+@media screen and (min-height: 672px){
+  .m-song-info {
+      margin-top: 25px;
+  }
+  .m-song-lrc{
+    margin-top: 14px;
+  }
+}
+
+
 

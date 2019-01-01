@@ -1,20 +1,20 @@
-.edit-container{
-  display: block;
-  max-width: 440px;
-  width: 100%;
-  padding: 16px;
-  margin: 0 auto;
-  margin-top: 56px;
-  background: #fafbfd;
-  border-radius: 6px;
-  text-align: left;
-  overflow: hidden;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.edit-container .edit_inner{
+input{
+  background:none;  
+	outline:none;  
+	border:0px;
+}
+
+.edit_inner{
   display: flex;
   background: #fff;
-  padding: 56px 0;
+  padding-top: 56px;
+  padding-bottom: 30px;
   border: 2px dashed #C8C8CE;
   border-radius: 6px;
   flex-direction: column;
@@ -22,6 +22,37 @@
   overflow: hidden;
 }
 
+.edit_item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  height: 22px;
+  line-height: 22px;
+}
+
+.edit_item label{
+  display: inline-block;
+  color: grey;
+  width: 60px;
+  margin-right: 9px;
+  margin-bottom: 0;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.edit_item input{
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.edit_item input:focus{
+  box-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+}
 .fadeIn_container{
   animation: fadeIn_container .2s ease-in;
 }
