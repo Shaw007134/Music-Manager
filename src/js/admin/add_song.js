@@ -308,7 +308,7 @@ function uploadFile(fileobj){
     })
     updateProgress(li,ul)
     song_save(fileobj)
-    updateSongs(fileobj)
+    updateSongs('song_item',fileobj,'song_items',active_song)
     process_array.remove(fileobj)
     set_progress()
   }

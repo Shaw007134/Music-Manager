@@ -17,6 +17,7 @@ var song_items = document.querySelector('.song_items')
 
 
 var Song = AV.Object.extend('Song');
+var PlayList = AV.Object.extend('Playlist')
 
 var song_tap = document.querySelector('.song_tap')
 var songlist_tap = document.querySelector('.songlist_tap')
@@ -40,18 +41,23 @@ function getToken(){
   token = "NHoNtSaQ4SA9yOtrQ3Ah9gy8J8ADM1dxOnt-yI7X:gb3UQCOZmBxwAcy9bE2bDtO-QCg=:eyJzY29wZSI6Im11c2ljLW1hbmFnZXIiLCJkZWFkbGluZSI6MTU0NTUzNzk0N30="
 }
 
-function song_list(){
+function songs(){
   var query = new AV.Query('Song')
   query.find().then(function(objects){
     objects.map(object=>{
       var fileobj = object['attributes']
-      var no = document.querySelectorAll('.song_item').length+'.'
-      console.log(no)
-      var template = `
-      <li class="song_item fadeIn"><span class="no">${no}</span><div class="song_title">${fileobj['title']}</div><div class="info_wrapper"><div class="song_singer">${fileobj['singer']}</div><div class="song_duration">${fileobj['duration']}</div></div></li>
-      `
-      console.log(template)
-      updateSongs(template,fileobj,song_items,active_song)
+      updateSongs('song_item',fileobj,'song_items',active_song)
+    })
+    
+  })
+}
+
+function playlists(){
+  var query = new AV.Query('Playlist')
+  query.find().then(function(objects){
+    objects.map(object=>{
+      var fileobj = object['attributes']
+      updateSongs('song_item',fileobj,'song_items',active_song)
     })
     
   })
@@ -71,46 +77,21 @@ function song_find(item,callback){
   })
 }
 
-function updateSongs(template,fileobj,parent,callback){
+function updateSongs(item,fileobj,parent,callback){
+  var template 
+  var parent = document.querySelector('.'+parent)
+  if(item === 'song_item'){
+    var no = document.querySelectorAll('.'+item).length+'.'
+    template = `<li class="song_item fadeIn"><span class="no">${no}</span><div class="song_title">${fileobj['title']}</div><div class="info_wrapper"><div class="song_singer">${fileobj['singer']}</div><div class="song_duration">${fileobj['duration']}</div></div></li>`
+  }else if(item==='song_list'){
+
+  }
   parent.insertAdjacentHTML('beforeend',template)
   parent.lastChild.addEventListener('click',e=>{
     if(e.currentTarget.className.indexOf('active') == -1){
       callback(e.currentTarget,fileobj)
     }
   })
-  // var new_song = document.createElement('li')
-  // var song_no = document.createElement('span')
-  // var song_title = document.createElement('div')
-  // var info_wrapper = document.createElement('div')
-  // var song_singer = document.createElement('div')
-  // var song_duration = document.createElement('div')
-
-
-  // new_song.className = 'song_item fadeIn'
-  // song_no.className = 'no'
-  // song_title.className = 'song_title'
-  // info_wrapper.className = 'info_wrapper'
-  // song_singer.className = 'song_singer'
-  // song_duration.className = 'song_duration'
-
-  // new_song.appendChild(song_no)
-  // new_song.appendChild(song_title)
-  // new_song.appendChild(info_wrapper)
-  // info_wrapper.appendChild(song_singer)
-  // info_wrapper.appendChild(song_duration)
-
-  // song_no.innerHTML = document.querySelectorAll('.song_item').length+1+'.'
-  // song_title.innerHTML = fileobj["title"]
-  // song_singer.innerHTML = fileobj["singer"]
-  // song_duration.innerHTML = fileobj['duration']
-
-  // song_items.appendChild(new_song)
-
-  // new_song.addEventListener('click',e=>{
-  //   if(e.currentTarget.className.indexOf('active') == -1){
-  //     active_song(e.currentTarget,fileobj)
-  //   }
-  // })
 }
 
 function song_save(fileobj){
@@ -169,7 +150,7 @@ songlist_tap.addEventListener('click',()=>{
 })
 
 window.addEventListener('load',getToken,false)
-window.addEventListener('load',song_list,false)
+window.addEventListener('load',songs,false)
 
 
 add_song.addEventListener('click',function(){
