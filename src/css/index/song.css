@@ -316,6 +316,7 @@ transition-duration: 0ms; */
 
 .m-guide .arr.ani {
   animation: shining 1.2s steps(1) infinite;
+  text-overflow: e
 }
 
 .m-song-lritem.active{

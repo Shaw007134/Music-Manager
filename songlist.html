@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="playlistForm-wrapper">
+    <h1>创建歌单</h1>
+    <form action="" class="playlistForm">
+      <div class="row">
+        <label><input type="text" name="title" id=""></label>
+      </div>
+      <div class="row">
+         <label><textarea name="summary" id="" cols="30" rows="10"></textarea></label>
+      </div>
+      <div class="row">
+        <button type="submit">创建</button>
+      </div>
+    </form>
+  </div>
+  <script src="./lib/av-min.js"></script>
+  <script src="./src/js/av_init.js"></script>
+  <script src="./lib/jquery-3.3.1.min.js"></script>
+  <script src="./src/js/eventhub.js"></script>
+  <script>
+    {
+      let view = {
+        el: '.playlistForm-wrapper',
+        init(){
+          this.$el = $(this.el)
+        }
+      }
+      let model = {
+        create(data){
+          // var Song = AV.Object.extend('Song')
+          // var song = new Song()
+          // song.set('title','1111')
+          // song.set('singer','222')
+
+          var Playlist = AV.Object.extend('Playlist')
+          var playlist = new Playlist()
+
+          for (const key of Object.keys(data)){
+            playlist.set(key,data[key])
+          }
+
+          playlist.save().then((newlist)=>{
+            console.log(newlist)
+          },(error)=>{
+            console.error(error)
+          })
+
+          // song.set('dependent',playlist)
+          // song.save().then((newsong)=>{
+          //   console.log(newsong)
+          // },(error)=>{
+          //   console.error(error)
+          // })
+        }
+      }
+      let controller = {
+        init(view, model){
+          this.view = view
+          this.view.init()
+          this.model = model
+          this.bindEvents()
+        },
+        bindEvents(){
+          this.view.$el.on('submit','form',(e)=>{
+            e.preventDefault();
+            let form = this.view.$el.find('form').get(0)
+            let keys = ['title','summary']
+            let data = {}
+            keys.reduce((prev,item)=>{
+              console.log(prev)
+              prev[item] = form[item].value.trim()
+              return prev
+            },data)
+            this.model.create(data)
+          })
+        }
+      }
+      controller.init(view,model)
+    }
+  </script>
+  <script>
+    
+  </script>
+</body>
+</html>

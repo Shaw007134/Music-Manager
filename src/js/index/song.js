@@ -97,6 +97,7 @@
           song[key] = object.attributes[key]
         }
         Object.assign(this.data.song,song)
+        //return Object.assign({id: object.id},object.attributes)
         return object
       })
     }
