@@ -2,56 +2,18 @@ var file_array = []
 var process_array = []
 var max_queue = 2
 
-function createDropzone(){
-  var drop_container = document.createElement('div')
-  drop_container.className="add-edit-container fadeIn"
-  add_edit.appendChild(drop_container)
-  var droppable = document.createElement('div')
-  droppable.className = 'droppable'
-  drop_container.appendChild(droppable)
+function createDropzone(parent){
 
-  var drop_inner = document.createElement('div')
-  drop_inner.className = 'drop-inner'
-  droppable.appendChild(drop_inner)
-
-  var cloud_icon = document.createElement('div')
-  cloud_icon.className = 'icon-jfi-cloud-up-o'
-  drop_inner.appendChild(cloud_icon)
-
-  var inner_caption = document.createElement('h3')
-  inner_caption.className = 'caption'
-  inner_caption.innerHTML = 'Drag and drop files here'
-  droppable.appendChild(inner_caption)
-
-  var inner_p = document.createElement('p')
-  inner_p.innerHTML = 'or'
-  droppable.appendChild(inner_p)
-
-  var browse_button = document.createElement('div')
-  browse_button.className = 'browse-button'
-  droppable.appendChild(browse_button)
-
-  var button_span = document.createElement('span')
-  button_span.innerHTML = 'Browse files'
-  browse_button.appendChild(button_span)
-
-
-  var upload_status = document.createElement('div')
-  upload_status.className = 'upload_status'
-  drop_container.appendChild(upload_status)
-
-  var upload_items = document.createElement('div')
-  upload_items.className = 'upload-items'
-  upload_status.appendChild(upload_items)
-
-  
+  var template = `<div class="add-edit-container fadeIn"><div class="droppable"><div class="drop-inner"><div class="icon-jfi-cloud-up-o"></div></div><h3 class="caption">Drag and drop files here</h3><p>or</p><div class="browse-button"><span>Browse files</span></div><input type="file" multiple="true" style="display: none;"></div><div class="upload_status"><div class="upload-items"></div></div></div>`
+  var parent = document.querySelector('.'+parent)
+  parent.insertAdjacentHTML('beforeend',template)
 
   var input = document.createElement('input')
   input.setAttribute('type','file')
   input.setAttribute('multiple',true)
   input.style.display = 'none'
   
-
+  var droppable = document.querySelector('.droppable')
 
 
   input.addEventListener('change',triggerCallback,false)
@@ -308,7 +270,7 @@ function uploadFile(fileobj){
     })
     updateProgress(li,ul)
     song_save(fileobj)
-    updateSongs('song_item',fileobj,'song_items',active_song)
+    updateLists(['song_item',fileobj,'song_items',active_song])
     process_array.remove(fileobj)
     set_progress()
   }

@@ -46,7 +46,7 @@ function songs(){
   query.find().then(function(objects){
     objects.map(object=>{
       var fileobj = object['attributes']
-      updateSongs('song_item',fileobj,'song_items',active_song)
+      updateLists(['song_item',fileobj,'song_items',active_song])
     })
     
   })
@@ -56,8 +56,9 @@ function playlists(){
   var query = new AV.Query('Playlist')
   query.find().then(function(objects){
     objects.map(object=>{
-      var fileobj = object['attributes']
-      updateSongs('song_item',fileobj,'song_items',active_song)
+      var fileobj = {"id":object.id}
+      Object.assign(fileobj,object['attributes'])
+      updateLists(['list_item',fileobj,'song_lists',active_list])
     })
     
   })
@@ -77,22 +78,27 @@ function song_find(item,callback){
   })
 }
 
-function updateSongs(item,fileobj,parent,callback){
+function updateLists([item,fileobj,parent,callback]){
+  if(item === undefined) return
   var template 
   var parent = document.querySelector('.'+parent)
+  var no = document.querySelectorAll('.'+item).length+1+'.'
   if(item === 'song_item'){
-    var no = document.querySelectorAll('.'+item).length+'.'
     template = `<li class="song_item fadeIn"><span class="no">${no}</span><div class="song_title">${fileobj['title']}</div><div class="info_wrapper"><div class="song_singer">${fileobj['singer']}</div><div class="song_duration">${fileobj['duration']}</div></div></li>`
-  }else if(item==='song_list'){
-
+  }else if(item === 'list_item'){
+    template=`<li class="list_item fadeIn"><span class="no">${no}</span><div class="songlist_title">${fileobj['title']}</div></li>`
   }
   parent.insertAdjacentHTML('beforeend',template)
   parent.lastChild.addEventListener('click',e=>{
     if(e.currentTarget.className.indexOf('active') == -1){
       callback(e.currentTarget,fileobj)
+      // window.eventHub.emit(callback,e)
     }
   })
 }
+
+
+window.eventHub.on('updateLists',updateLists)
 
 function song_save(fileobj){
   var song = new Song();
@@ -119,6 +125,19 @@ function remove_status(ele,status){
     for(var i=0; i<ele.children.length;i++){
       remove_status(ele.children[i],status)
     }
+}
+
+function remove_other(ele,status,className){
+  var list_item = document.querySelectorAll('.'+className)
+  list_item = [...list_item]
+  if(ele.className.indexOf(status) == -1){
+    list_item.map(item=>{
+      if(item != ele && item.className.indexOf(status) > -1){
+        item.classList.remove(status)
+      }
+    })
+    ele.classList.add(status)
+  }
 }
 
 song_tap.addEventListener('click',()=>{
@@ -151,6 +170,7 @@ songlist_tap.addEventListener('click',()=>{
 
 window.addEventListener('load',getToken,false)
 window.addEventListener('load',songs,false)
+window.addEventListener('load',playlists,false)
 
 
 add_song.addEventListener('click',function(){
@@ -159,7 +179,7 @@ add_song.addEventListener('click',function(){
     add_song.className += ' active'
     var song_items = document.querySelector('.song_items')
     remove_status(song_items,'active')
-    createDropzone()
+    createDropzone('add_edit')
   }
 })
 
@@ -169,7 +189,8 @@ add_songlist.addEventListener('click',function(){
     add_songlist.className += ' active'
     var song_lists = document.querySelector('.song_lists')
     remove_status(song_lists,'active')
-    createDropzone()
+    // createSonglist('add_edit')
+    window.eventHub.emit('add_song',)
   }
 })
 

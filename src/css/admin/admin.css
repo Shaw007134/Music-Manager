@@ -120,9 +120,6 @@ aside .song_lists{
   display: none;
 }
 aside ul .song_item{
-  /* padding-top: 15px; */
-  /* padding-bottom: 15px; */
-  /* margin: 0; */
   height: 50px;
   font-size: 14px;
   color: #dedede;
@@ -130,12 +127,24 @@ aside ul .song_item{
   flex-direction: row;
   align-items: center;
   border-bottom: 1px solid #A3A5A9;
-  /* line-height: 50px; */
+  cursor: pointer;
+}
+
+aside ul .list_item{
+  height: 50px;
+  font-size: 14px;
+  color: #dedede;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #A3A5A9;
   cursor: pointer;
 }
 
 aside ul .song_item.active,
-.add_song.active{
+aside ul .list_item.active,
+.add_song.active,
+.add_songlist.active{
   color: rgba(0,0,0);
   background-color: rgba(255,255,255,0.5);
   /* opacity: 0.5; */
@@ -144,6 +153,7 @@ aside ul .song_item.active,
 }
 
 aside ul li .song_title,
+aside ul li .songlist_title,
 aside ul li .song_singer,
 .edit_inner .edit_button_container div,
 .upload-item .column-title div{
@@ -158,7 +168,8 @@ aside ul li .no{
   padding-right: 10px;
 }
 
-aside ul li .song_title{
+aside ul li .song_title,
+aside ul li .songlist_title{
   margin-right:8px;
   flex: 1;
   text-align: left;
@@ -275,17 +286,17 @@ main div.add_edit{
   cursor: pointer;
 }
 
-.edit_inner .edit_button_container div:hover{
+.edit_inner .edit_button_container .edit_button:hover{
   color: #fff;
   background: #008BFF;
 }
 
-.edit_inner .edit_button_container div:last-child{
+.edit_inner .edit_button_container .remove_button{
   color: rgba(254,118,118,.8);
   border: 1px solid rgba(254,118,118,.8);
 }
 
-.edit_inner .edit_button_container div:last-child:hover{
+.edit_inner .edit_button_container .remove_button:hover{
   color: #fff;
   background: rgba(254,118,118,.8);
 }

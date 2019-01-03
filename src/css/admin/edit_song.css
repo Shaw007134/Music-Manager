@@ -10,6 +10,11 @@ input{
 	border:0px;
 }
 
+textarea{
+  outline: none;
+  resize: none;
+}
+
 .edit_inner{
   display: flex;
   background: #fff;
@@ -26,9 +31,35 @@ input{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
-  height: 22px;
-  line-height: 22px;
+  margin-bottom: 10px;
+}
+
+
+.edit_textarea{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.edit_textarea label{
+  display: block;
+  color: grey;
+  margin-right: 142px;
+  margin-bottom: 4px;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.edit_textarea textarea{
+  padding: 8px;
+  border: 1px solid #ccc;
+  margin-left: 45px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: inherit;
 }
 
 .edit_item label{
@@ -51,7 +82,7 @@ input{
 }
 
 .edit_item input:focus{
-  box-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+  box-shadow:  0px 0px 5px 1px rgba(0, 0, 0, 0.2);
 }
 .fadeIn_container{
   animation: fadeIn_container .2s ease-in;
