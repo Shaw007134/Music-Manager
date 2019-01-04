@@ -1,10 +1,11 @@
 {
   let view = {
     el: '.add_edit',
-    template: `<div class="add-edit-container fadeIn"><div class="edit_inner"><div class="edit_item"><label for="edit_name">歌单名: </label><input type="text" class="edit_input" id="edit_name"></div><div class="edit_item"><label for="edit_owner">创建者: </label><input type="text" class="edit_input" id="edit_owner"></div><div class="edit_textarea"><label for="summary">歌单简介: </label><textarea name="summary" class="textarea" id="summary" cols="30" rows="3"></textarea></div><div class="edit_button_container"><div class="edit_button">创建歌单</div></div></div><div class="upload-items"></div></div>`,
+    template: `<div class="add-edit-container fadeIn"><div class="edit_inner"><div class="edit_item"><label for="edit_name">歌单名: </label><input type="text" class="edit_input" id="edit_name"></div><div class="edit_item"><label for="edit_owner">创建者: </label><input type="text" class="edit_input" id="edit_owner"></div><div class="edit_item"><label for="edit_cover">封面: </label><input type="text" class="edit_input" id="edit_cover"></div><div class="edit_textarea"><label for="summary">歌单简介: </label><textarea name="summary" class="textarea" id="summary" cols="30" rows="3"></textarea></div><div class="edit_button_container"><div class="edit_button">创建歌单</div></div></div><div class="upload-items"></div></div>`,
     init(){
       this.$el = document.querySelector(this.el)
     },
+ 
     render(){
       this.$el.insertAdjacentHTML('beforeend',this.template)
     }
@@ -90,6 +91,7 @@
           let list = {
             "title": edit_input[0].value,
             "name": edit_input[1].value,
+            "cover": edit_input[2].value,
             "summary": edit_textarea.value,
           }
           this.model.create(list,(e)=>{
@@ -101,7 +103,7 @@
             let newlist = lists[lists.length-1]
             active_list(newlist,e)
           })
-          window.alert("歌单："+edit_input[0].value+"创建成功")
+          window.alert("歌单："+edit_input[0].value+" 创建成功")
           // edit_input[0].value = ''
           // edit_input[1].value = ''
           // edit_textarea.value = ''

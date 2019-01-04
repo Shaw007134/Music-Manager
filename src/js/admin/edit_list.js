@@ -19,7 +19,7 @@ function active_list(list,fileobj){
       if(add_songlist.classList.contains('active')||this.$el.innerHTML===''){
         this.$el.innerHTML = ''
         add_songlist.classList.remove('active')
-        let template = `<div class="add-edit-container fadeIn"><div class="edit_inner"><div class="edit_item"><label for="edit_name">歌单名: </label><input type="text" class="edit_input" id="edit_name" value=${data.title}></div><div class="edit_item"><label for="edit_owner">创建者: </label><input type="text" class="edit_input" id="edit_owner" value=${data.name}></div><div class="edit_textarea"><label for="summary">歌单简介: </label><textarea name="summary" class="textarea" id="summary" cols="30" rows="3">${data.summary}</textarea></div><div class="edit_button_container"><div class="edit_button">保存更改</div><div class="remove_button">删除歌单</div></div></div><div class="upload-items"></div></div>`
+        let template = `<div class="add-edit-container fadeIn"><div class="edit_inner"><div class="edit_item"><label for="edit_name">歌单名: </label><input type="text" class="edit_input" id="edit_name" value=${data.title}></div><div class="edit_item"><label for="edit_owner">创建者: </label><input type="text" class="edit_input" id="edit_owner" value=${data.name}></div><div class="edit_item"><label for="edit_cover">封面: </label><input type="text" class="edit_input" id="edit_cover" value=${data.cover}></div><div class="edit_textarea"><label for="summary">歌单简介: </label><textarea name="summary" class="textarea" id="summary" cols="30" rows="3">${data.summary}</textarea></div>        <div class="edit_button_container"><div class="edit_button">保存更改</div><div class="remove_button">删除歌单</div></div></div><div class="upload-items"></div></div>`
         this.$el.insertAdjacentHTML('beforeend',template)
       }else{
         let items = document.querySelector('.upload-items')
@@ -28,6 +28,7 @@ function active_list(list,fileobj){
         let edit_textarea = this.$el.querySelector('.textarea')
         edit_input[0].value = data['title']
         edit_input[1].value = data['name']
+        edit_input[2].value = data['cover']
         edit_textarea.value = data['summary']
         document.querySelector('.edit_button').outerHTML = document.querySelector('.edit_button').outerHTML
         document.querySelector('.remove_button').outerHTML = document.querySelector('.remove_button').outerHTML
@@ -112,6 +113,7 @@ function active_list(list,fileobj){
           function edit_listener(){
             item.set('title',edit_item[0].value)
             item.set('name',edit_item[1].value)
+            item.set('cover',edit_item[2].value)
             item.set('summary',edit_textarea.value)
             item.save()
   

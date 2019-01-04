@@ -18,8 +18,8 @@
       this.view.init()
       this.model = model
       this.bindEventHub()
-      this.loadModule1()
-      this.loadModule2()
+      this.loadSong()
+      this.loadSonglist()
     },
     bindEventHub(){
       window.eventHub.on('selectNav',(navName)=>{
@@ -30,21 +30,21 @@
         }
       })
     },
-    loadModule1(){
-      let recom1 = document.createElement('script')
-      recom1.src = './src/js/index/recom_1.js'
-      recom1.onload = function() {
-        console.log('recom1 loaded')
+    loadSong(){
+      let recom = document.createElement('script')
+      recom.src = './src/js/index/recom_song.js'
+      recom.onload = function() {
+        console.log('recom loaded')
       }
-      document.body.appendChild(recom1)
+      document.body.appendChild(recom)
     },
-    loadModule2(){
-      let recom2 = document.createElement('script')
-      recom2.src = './src/js/index/recom_2.js'
-      recom2.onload = function() {
-        console.log('recom2 loaded')
-      }
-      document.body.appendChild(recom2)
+    loadSonglist(){
+        let recomList = document.createElement('script')
+        recomList.src = './src/js/index/recom_list.js'
+        recomList.onload = function() {
+          console.log('recomList loaded')
+        }
+        document.body.appendChild(recomList)
     }
   }
   controller.init(view,model)
