@@ -82,7 +82,6 @@ function filehandler(files) {
     thumbnail.setAttribute('class','column-thumbnail')
     title.setAttribute('class','column-title')
     action.setAttribute('class','column-action')
-
     
     name.innerHTML = file.name; 
     size.innerHTML = (parseInt(file.size)/1024/1024).toFixed(2).toString()+' MB'

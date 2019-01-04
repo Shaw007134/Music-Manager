@@ -42,24 +42,17 @@ function edit_song(song,fileobj){
   var remove_btn = document.querySelector('.remove_button')
   // edit_btn = edit_btn.cloneNode(true)
   function edit_listener(){
-    update_song_db(fileobj)  
+    update_song_db(fileobj.id)  
     update_song_list(song)
   }
   function remove_listener(){
-    remove_song_db(fileobj)
+    remove_song_db(fileobj.id)
     remove_song_list(song)
   }
   edit_btn.addEventListener('click',edit_listener)
   remove_btn.addEventListener('click',remove_listener)
 }
 
-function update_song_db(item){
-  song_find(item,edit_callback)
-}
-
-function remove_song_db(item){
-  song_find(item,remove_callback)
-}
 function remove_song_list(song){
   song.classList.add('fadeOut')
   var edit_item = document.querySelectorAll('.edit_input')
@@ -80,7 +73,7 @@ function update_song_list(song){
   song.querySelector('.song_singer').innerHTML = edit_item[1].value
 }
 
-function edit_callback(id){
+function update_song_db(id){
   var item = AV.Object.createWithoutData('Song', id)
   var edit_item = document.querySelectorAll('.edit_input')
   item.set('title',edit_item[0].value)
@@ -89,8 +82,9 @@ function edit_callback(id){
   item.set('cover',edit_item[3].value)
   item.set('lyric',edit_item[4].value)
   item.save()
+  //更新后如何自动刷新结果
 }
-function remove_callback(id){
+function remove_song_db(id){
   var item = AV.Object.createWithoutData('Song', id)
   item.destroy().then(function (success) {
     console.log('remove done')

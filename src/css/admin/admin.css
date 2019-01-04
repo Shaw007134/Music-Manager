@@ -484,6 +484,11 @@ main div.add_edit{
   box-shadow: -1px 1px 6px rgba(67,208,132,.8);
 }
 
+.upload-item .column-action a .add{
+  background: rgb(0, 140, 255);
+  box-shadow: -1px 1px 6px rgb(0, 140, 255,.8);
+}
+
 .upload-item .column-action a .icon-jfi-times::before{
   content: "\f316"
 }
@@ -492,6 +497,9 @@ main div.add_edit{
   content: "\f2f6"
 }
 
+.upload-item .column-action a .icon-jfi-plus::before{
+  content: "\f311"
+}
 
 .upload-item .item-progress {
   z-index: 1;

@@ -45,7 +45,8 @@ function songs(){
   var query = new AV.Query('Song')
   query.find().then(function(objects){
     objects.map(object=>{
-      var fileobj = object['attributes']
+      var fileobj = {"id":object.id}
+      Object.assign(fileobj,object['attributes'])
       updateLists(['song_item',fileobj,'song_items',active_song])
     })
     
@@ -56,9 +57,11 @@ function playlists(){
   var query = new AV.Query('Playlist')
   query.find().then(function(objects){
     objects.map(object=>{
-      var fileobj = {"id":object.id}
-      Object.assign(fileobj,object['attributes'])
-      updateLists(['list_item',fileobj,'song_lists',active_list])
+      if(object.id != '5c2ef5cc44d904005de78c91'){
+        var fileobj = {"id":object.id}
+        Object.assign(fileobj,object['attributes'])
+        updateLists(['list_item',fileobj,'song_lists',active_list])
+      }
     })
     
   })
@@ -79,15 +82,18 @@ function song_find(item,callback){
 }
 
 function updateLists([item,fileobj,parent,callback]){
-  if(item === undefined) return
-  var template 
-  var parent = document.querySelector('.'+parent)
-  var no = document.querySelectorAll('.'+item).length+1+'.'
+  // if(item === undefined) return
+  var template
   if(item === 'song_item'){
+    var no = document.querySelectorAll('.'+item).length+1+'.'
     template = `<li class="song_item fadeIn"><span class="no">${no}</span><div class="song_title">${fileobj['title']}</div><div class="info_wrapper"><div class="song_singer">${fileobj['singer']}</div><div class="song_duration">${fileobj['duration']}</div></div></li>`
   }else if(item === 'list_item'){
+    var no = document.querySelectorAll('.'+item).length+1+'.'
     template=`<li class="list_item fadeIn"><span class="no">${no}</span><div class="songlist_title">${fileobj['title']}</div></li>`
+  }else{
+    template = item
   }
+  var parent = document.querySelector('.'+parent)
   parent.insertAdjacentHTML('beforeend',template)
   parent.lastChild.addEventListener('click',e=>{
     if(e.currentTarget.className.indexOf('active') == -1){
@@ -190,7 +196,7 @@ add_songlist.addEventListener('click',function(){
     var song_lists = document.querySelector('.song_lists')
     remove_status(song_lists,'active')
     // createSonglist('add_edit')
-    window.eventHub.emit('add_song',)
+    window.eventHub.emit('add_songlist',)
   }
 })
 
