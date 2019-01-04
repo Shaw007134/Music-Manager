@@ -8,54 +8,47 @@
   <title>歌单页面</title>
 </head>
 <body>
-  <div class="info_box">
-    <div class="album">
-      <div class="album_media clearfix">
-        <img src="./assets/img/gd/1.jpg" alt="" class="album_cover">
-      </div>
-      <div class="album_bd">
-        <h1 class="album_name">经典华语歌曲</h1>
-        <div class="author">admin</div>
-        <p class="album_desc"></p>
-      </div>
-    </div>
-    <img src="./assets/img/gd/1.jpg" alt="" class="info_box_bg">
-  </div>
   <div class="wrap">
-    <div class="main">
-      <div class="count_box">
-        <div class="count_box_desc">
-          歌单共
-          <span class="count_box_number"></span>
-          首
-        </div>
-        <a href="javascript:;" class="collect">收藏
-          <svg class="collect_icon"></svg>
-        </a>
-      </div>
-      <ul class="qui_list">
-        <li class="qui_list_item">
-          <div class="qui_list_bd">
-            <div class="qui_list_box">
-              <h3 class="qui_list_tit"></h3>
-              <p class="qui_list_desc"></p>
-            </div>
+    <div class="top_wrap">
+      <div class="top_bg"></div>
+      <div class="top_inner">
+        <img src="./assets/img/600.jpg" alt="">
+        <div class="top_desc">
+          <p class="list_title">盘点演唱会经典万人大合唱</p>
+          <div class="author">
+            <img src="./assets/img/g.gif" alt="" class="author">
+            <p class="list_name">Admin</p>
           </div>
-        </li>
-      </ul>
-      <div class="check_more">点击加载更多歌曲</div>
-      <div class="qui_tit">
-        <h2 class="qui_tit_text">歌单简介</h2>
-      </div>
-      <div class="intro">
-        <p class="intro_para">这里是简介</p>
-        <a href="" class="intro_switch">展开</a>
-      </div>
-      <div class="brand">
-        <img src="./assets/img/logo.png" alt="" class="brand_logo">
-        <p class="brand__name">QQ音乐</p>
+          <span class="playcount">播放量：63</span>
+        </div>
       </div>
     </div>
+    <div class="plst_intro">
+      <div class="u-intro">
+        <p class="l3">简介：用一种语言来形容听Future Beats的感受的话
+            <br>大概就是耳朵听着歌°
+            <br>脑子还没反应过来°
+            <br>脑子还没反应过来°
+        </p>
+      </div>
+    </div>
+    <div class="pylst_list">
+      <h3 class="u-smtitle">歌曲列表</h3>
+      <ul class="u-songs">
+        <!-- <a href="./song.html?id=5c2ad1c19f545400700fdcaa" class="sgitem">
+          <div class="no">1.</div>
+          <div class="item_container">
+            <div class="title">Fantastic Baby</div>
+            <div class="singer">まじ娘</div>
+          </div>
+          <div class="item_play"><div class="icon_play"></div></div>
+        </a> -->
+      </ul>
   </div>
+  <script src="./lib/jquery-3.3.1.min.js"></script>
+  <script src="./lib/av-min.js"></script>
+  <script src="./src/js/av_init.js"></script>
+  <script src="./src/js/eventhub.js"></script>
+  <script src="./src/js/index/playlist.js"></script>
 </body>
 </html>

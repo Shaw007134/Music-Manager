@@ -378,16 +378,6 @@ body {
   color: #888;
 }
 
-.sgitem .singer
-.sq{
-  display: inline-block;
-  width: 12px;
-  height: 8px;
-  margin-right: 4px;
-  background: url(../../../assets/img/favico2.png) no-repeat;
-  background-size: 166px 97px;
-}
-
 .sgitem .item_play{
   display: flex;
   align-items: center;
