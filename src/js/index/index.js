@@ -15,6 +15,8 @@ window.onload = function() {
   slides.insertBefore(lastCopy,slides.firstChild)
   slides.appendChild(firstCopy)
   carousel(playOptions, 2000);
+  clearInterval(playOptions.timer);
+  carousel(playOptions, 2000);
 };
 
 window.onresize = function() {

@@ -9,9 +9,12 @@
       let {song,status,load} = data
       this.$el.find('.m-song-sname').text(song.title)
       this.$el.find('.m-song-autr').text(song.singer)
+      console.log('load----'+load)
       if(!load){
-        this.$el.find('.m-song-bg').css('background-image',`url(${song.cover})`)
-        this.$el.find('img').attr('src',`${song.cover}`)
+        if(song.cover) {
+          this.$el.find('.m-song-bg').css('background-image',`url(${song.cover})`)
+          this.$el.find('img').attr('src',`${song.cover}`)
+        }
         this.$el.find('.m-song-clickarea').html(`<audio src=${song.url}></audio>`)
         let lyrics = song.lyric.split('\n')
         let lyrics_inner = this.$el.find('.m-song-inner')
@@ -33,15 +36,27 @@
           this.showLyric(audio.currentTime)
         } 
       }
-      if(status === 'paused'){
-        this.$el.find('.m-song-plybtn').css('display','block')
-        this.$el.find('.a-circling').addClass('paused')
-        this.pause()
-      }else{
-        this.$el.find('.m-song-plybtn').css('display','none')
-        this.$el.find('.a-circling').removeClass('paused')
-        this.play()
+      let audioPromise = this.play()
+      console.log('render-----'+status)
+      if (audioPromise != undefined) {
+        audioPromise.then(()=>{
+          if(status){
+            this.$el.find('.m-song-plybtn').css('display','none')
+            this.$el.find('.a-circling').removeClass('paused')
+            this.play()
+          }else{
+            this.$el.find('.m-song-plybtn').css('display','block')
+            this.$el.find('.a-circling').addClass('paused')
+            this.pause()
+          }
+        },()=>{
+          console.log('reject')
+          this.$el.find('.m-song-plybtn').css('display','block')
+          this.$el.find('.a-circling').addClass('paused')
+          this.pause()
+        })
       }
+      
     },
     showLyric(time){
       let allP = this.$el.find('.m-song-lritem')
@@ -67,11 +82,11 @@
       }
     },
     play(){
-      this.$el.find('audio')[0].play()
+      return this.$el.find('audio')[0].play()
       //chrome刷新会提示in promise DOM exception错误
     },
     pause(){
-      this.$el.find('audio')[0].pause()
+      return this.$el.find('audio')[0].pause()
     },
   }
 
@@ -85,8 +100,8 @@
         cover: '',
         lyric: ''
       },
-      status: '',
-      load: false
+      status: true,
+      load: false,
     },
 
     get(id){
@@ -109,16 +124,25 @@
       this.view.init()
       this.model = model
       let id = this.getSongId()
+      console.log('init')
       this.model.get(id).then(()=>{
-        $.getJSON(this.model.data.song['lyric'],
+        console.log(id)
+        if(this.model.data.song['lyric']){
+          $.getJSON(this.model.data.song['lyric'],
           (data)=>{
+            console.log('lyric')
             this.model.data.song['lyric'] = data.tlyric.lyric
             this.view.render(this.model.data)
             this.model.data.load = true
           }
-        )
+        )}else{
+          this.view.render(this.model.data)
+          this.model.data.load = true
+        }
+        
         this.view.$el.find('audio')[0].onended = ()=>{
-          this.model.data.status = 'paused'
+          this.model.data.status = false
+          console.log('audio onend')
           this.view.render(this.model.data)
         }
       })
@@ -126,13 +150,9 @@
     },
     bindEvents(){
       this.view.$el.on('click','.m-song_newfst',()=>{
-        if(this.model.data.status === ''){
-          this.model.data.status = 'paused'
+          console.log(this.model.data.status)
+          this.model.data.status = !this.model.data.status
           this.view.render(this.model.data)
-        }else{
-          this.model.data.status = ''
-          this.view.render(this.model.data)
-        }
       })
     },
     getSongId(){
