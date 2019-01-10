@@ -26,6 +26,7 @@ header{
   /* top: 0; */
   /* left: 0; */
   border: 1px solid darkgoldenrod;
+  border-radius: 4px;
   height: 80px;
   width: 100%;
 }
@@ -54,7 +55,7 @@ main{
 
 main aside{
   flex: 3;
-  border: 1px solid orangered;
+  /* border: 1px solid orangered; */
   height: 100%;
   width: 100%;
   display: flex;
@@ -149,7 +150,7 @@ aside ul .list_item.active,
   background-color: rgba(255,255,255,0.5);
   /* opacity: 0.5; */
   font-weight: 700;
-  text-shadow: 2px 2px 3px rgb(0,0,0,0.3)
+  /* text-shadow: 2px 2px 3px rgb(0,0,0,0.3) */
 }
 
 aside ul li .song_title,
@@ -170,8 +171,7 @@ aside ul li .no{
 
 aside ul li .song_title,
 aside ul li .songlist_title{
-  margin-right:8px;
-  flex: 1;
+  flex: 5;
   text-align: left;
   font-size: 14px;
   /* color: whitesmoke; */
@@ -179,14 +179,17 @@ aside ul li .songlist_title{
 
 
 aside ul li .info_wrapper{
+  flex: 3;
   display: flex;
   flex-direction: row;
   width: 130px;
+  margin-right: 20px;
   justify-content: space-between;
   align-items: center;
 }
 aside ul li .song_singer{
   flex: 1;
+  margin-right: 20px;
   text-align: left;
   margin-right: 10px;
 }
@@ -198,7 +201,7 @@ aside ul li .song_duration{
 
 main div.add_edit{
   flex: 7;
-  border: 1px solid greenyellow;
+  /* border: 1px solid greenyellow; */
   height: 100%;
   width: 100%;
   overflow-y: auto;

@@ -117,15 +117,15 @@ function getDuration(fileobj){
     window.URL.revokeObjectURL(dataurl)
     minutes = (Math.floor(duration/60))
     seconds = duration%60
-    seconds = seconds>10?seconds:'0'+seconds
+    seconds = seconds>9?seconds:'0'+seconds
     if(minutes>60){
       hours = Math.floor(minutes/60)
-      hours = hours>10?hours:'0'+hours
+      hours = hours>9?hours:'0'+hours
       minutes = minutes%60
-      minutes = minutes>10?minutes:'0'+minutes
+      minutes = minutes>9?minutes:'0'+minutes
       var duration_time = hours+":"+minutes+":"+seconds
     }else{
-      minutes = minutes>10?minutes:'0'+minutes
+      minutes = minutes>9?minutes:'0'+minutes
       var duration_time = minutes+":"+seconds
     }
     fileobj["duration"] = duration_time
