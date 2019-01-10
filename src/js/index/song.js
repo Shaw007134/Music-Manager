@@ -13,7 +13,7 @@
       if(!load){
         if(song.cover) {
           this.$el.find('.m-song-bg').css('background-image',`url(${song.cover})`)
-          this.$el.find('img').attr('src',`${song.cover}`)
+          this.$el.find('.m-song-img>img').attr('src',`${song.cover}`)
         }
         this.$el.find('.m-song-clickarea').html(`<audio src=${song.url}></audio>`)
         let lyrics = song.lyric.split('\n')
