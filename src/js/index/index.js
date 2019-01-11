@@ -152,6 +152,7 @@ function carousel(option, interval) {
   function play() {
     option.timer = setInterval(function() {
       animate(current+1)
+      console.log(current)
     }, interval);
   }
 
@@ -179,8 +180,8 @@ function carousel(option, interval) {
     visibilityChange = "webkitvisibilitychange";
   }
   document.addEventListener(visibilityChange,function(){
-    console.log(current)
-    
+    console.log("visibilitychange current is: "+current)
+
     if(document.hidden){
       stop();
     }else{
