@@ -183,9 +183,12 @@ function carousel(option, interval) {
     if(document.hidden){
       console.log('hidden')
       stop();
+      console.log(option.timer)
     }else{
-      console.log('show')
-      play();
+      console.log('-----')
+      console.log(option.timer)
+      if(!option.timer) play();
+      console.log('-----')
     }
   })
 
