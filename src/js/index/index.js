@@ -4,7 +4,8 @@ var playOptions = {
   buttons: 'slides-buttons',
   prev: 'slides-prev',
   next: 'slides-next',
-  timer: null
+  timer: null,
+  duration: 2000,
 };
 
 window.onload = function() {
@@ -14,20 +15,31 @@ window.onload = function() {
   var lastCopy = slide[slide.length-1].cloneNode(true)
   slides.insertBefore(lastCopy,slides.firstChild)
   slides.appendChild(firstCopy)
-  carousel(playOptions, 2000);
-  // clearInterval(playOptions.timer);
-  // carousel(playOptions, 2000);
+  carousel(playOptions, playOptions.duration);
 };
 
 window.onresize = function() {
     clearInterval(playOptions.timer);
-    carousel(playOptions, 2000);
+    carousel(playOptions, playOptions.duration);
 };
 
+var pageVisibility = document.visibilityState;
 
+document.addEventListener('visibilitychange', function() {
+   	if (document.visibilityState == 'hidden') { 
+        console.log('hidden')
+        clearInterval(playOptions.timer);
+      }
+
+   	if (document.visibilityState == 'visible') { 
+        console.log('visible')
+        console.log(current)
+        carousel(playOptions, playOptions.duration);
+      }
+});
 
 var current = 0
-
+var initial_width
 
 function carousel(option, interval) {
   var $ = function(ele) {
@@ -40,7 +52,6 @@ function carousel(option, interval) {
     slides_next = $(option.next);
 
   var animated = false
-      // index = 1;
   
   var img = slides.getElementsByTagName('img'),
       len = img.length;
@@ -49,7 +60,7 @@ function carousel(option, interval) {
       height;
 
   function responseInit() {
-    width = slides_container.offsetWidth;
+    initial_width = width = slides_container.offsetWidth;
     height = parseInt((img[0].height));
     // 宽度随视窗自适应
     slides.style.left = -width + 'px';
@@ -94,12 +105,10 @@ function carousel(option, interval) {
     }else if(index < 0){
       index = size-1
     }
-   
     function resetImg(index) {
       animated = true;
       slides.style.left = -(width * index) + 'px';
       slides.style.transition = 'all 0s';
-      // slides.offset()
       animated = false;
     }
     function go() {
@@ -167,28 +176,9 @@ function carousel(option, interval) {
 
   slides_container.onmouseout = play;
 
-  var hidden, visibilityChange; 
-  if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
-    hidden = "hidden";
-    visibilityChange = "visibilitychange";
-  } else if (typeof document.msHidden !== "undefined") {
-    hidden = "msHidden";
-    visibilityChange = "msvisibilitychange";
-  } else if (typeof document.webkitHidden !== "undefined") {
-    hidden = "webkitHidden";
-    visibilityChange = "webkitvisibilitychange";
-  }
-  document.addEventListener(visibilityChange,function(e){
-    console.log("visibilitychange status: "+document.hidden)
-    if(document.hidden){
-      stop();
-    }else{
-      play();
-    }
-  })
-  window.onpopstate = function(e){
-    console.log('location: '+document.location+' state: '+JSON.stringify(e.state))
-  }
+ 
+  
+
 
   window.eventHub.on('selectNav',(navName)=>{
     if(navName === 'recom_wrap'){
@@ -199,7 +189,10 @@ function carousel(option, interval) {
   })
 
   function resizeListener(){
+    if(document.getElementById(option.containerID).offsetWidth!=initial_width){
+    console.log('resize')
     responseInit();
+    }
   }
   window.addEventListener('resize', resizeListener, false);
 }
