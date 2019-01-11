@@ -86,17 +86,19 @@ function carousel(option, interval) {
   }
   slides_buttons.innerHTML = '';
   slides_buttons.appendChild(btns);
-  slides_prev.onclick = function() {
-    if (!animated) {
-      animate(current-1);
+  if(slides_next && slides_prev){
+    slides_prev.onclick = function() {
+      if (!animated) {
+        animate(current-1);
+      }
     }
+  
+    slides_next.onclick = function() {
+      if (!animated) {
+        animate(current+1);
+      }
+    };
   }
-
-  slides_next.onclick = function() {
-    if (!animated) {
-      animate(current+1);
-    }
-  };
 
   function animate(index) {
     animated = true;
