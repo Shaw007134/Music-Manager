@@ -131,7 +131,7 @@
           $.getJSON(this.model.data.song['lyric'],
           (data)=>{
             console.log('lyric')
-            this.model.data.song['lyric'] = data.tlyric.lyric
+            this.model.data.song['lyric'] = data.lrc.lyric
             this.view.render(this.model.data)
             this.model.data.load = true
           }
