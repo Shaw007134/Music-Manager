@@ -180,6 +180,7 @@ function carousel(option, interval) {
   }
   document.addEventListener(visibilityChange,function(){
     console.log(current)
+    
     if(document.hidden){
       stop();
     }else{
