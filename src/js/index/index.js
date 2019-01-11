@@ -186,6 +186,9 @@ function carousel(option, interval) {
       play();
     }
   })
+  window.onpopstate = function(e){
+    console.log('location: '+document.location+' state: '+JSON.stringify(e.state))
+  }
 
   window.eventHub.on('selectNav',(navName)=>{
     if(navName === 'recom_wrap'){
