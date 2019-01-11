@@ -8,7 +8,13 @@ function active_song(song,fileobj){
       }
     })
     song.className += ' active'
-    edit_song(song,fileobj)
+    let query = new AV.Query('Song');
+    query.get(fileobj.id).then(function (obj) {
+      Object.assign(fileobj,obj.attributes)
+      edit_song(song,fileobj)
+    }, function (error) {
+      // 异常处理
+    });
   }
 }
 
@@ -42,10 +48,12 @@ function edit_song(song,fileobj){
   var remove_btn = document.querySelector('.remove_button')
   // edit_btn = edit_btn.cloneNode(true)
   function edit_listener(){
+    console.log(fileobj.id)
     update_song_db(fileobj.id)  
     update_song_list(song)
   }
   function remove_listener(){
+    console.log(fileobj.id)
     remove_song_db(fileobj.id)
     remove_song_list(song)
   }

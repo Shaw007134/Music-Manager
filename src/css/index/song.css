@@ -49,7 +49,7 @@ body, button, input, keygen, legend, select, textarea {
   background-position: center center;
   background-size: cover;
   transform: scale(1.5);
-  transform-origin: center top;
+  transform-origin: center center;
   filter: blur(5px);
   /* background-position: 50%; 
   background-size: auto 100%;

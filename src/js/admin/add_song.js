@@ -156,6 +156,7 @@ function set_progress(){
 function uploadFile(fileobj){ 
   var file = fileobj["file"]
   var name = file.name
+  
   var size = (parseInt(file.size)/1024/1024).toFixed(2).toString()+' MB'
   if(name.indexOf('-')>0){
     var title = name.split('-')[1].replace(' ','').split('.')[0]
@@ -164,14 +165,17 @@ function uploadFile(fileobj){
   fileobj['title'] = title
   fileobj['singer'] = singer 
   fileobj['size'] = size
-  fileobj['url'] = 'http://pjjtb28cj.bkt.clouddn.com/'+encodeURIComponent(name)
+  encodeURIComponent
+  fileobj['url'] = 'http://47.104.228.220:8888/download?'+encodeURIComponent(name)
+  console.log(fileobj['url'])
   var progressBar = fileobj["progress"]
   var xhr = new XMLHttpRequest(); 
   var upload = xhr.upload; 
   var formData = new FormData()
-  formData.append('file',file)
-  formData.append('custom_name',name)
-  formData.append('token',token)
+  formData.append('file',file,name)
+  // console.log(name)
+  // formData.append('key',name)
+  // formData.append('token',token)
   var span = document.createElement('span'); 
   var div = document.createElement('div');
 
@@ -198,7 +202,7 @@ function uploadFile(fileobj){
   upload.addEventListener("error", uploadError, false); 
   upload.addEventListener("abort", uploadAbort, false); 
   // 上传文件
-  xhr.open("POST", "http://upload.qiniup.com/"); 
+  xhr.open("POST", "http://47.104.228.220:8888/upload?"+name); 
 
   a.addEventListener('click',function(e){
     var i = e.currentTarget.firstChild.className
@@ -268,8 +272,10 @@ function uploadFile(fileobj){
       }
     })
     updateProgress(li,ul)
-    song_save(fileobj)
-    updateLists(['song_item',fileobj,'song_items',active_song])
+    function song_save_callback(){
+      updateLists(['song_item',fileobj,'song_items',active_song])
+    }
+    song_save(fileobj,song_save_callback)
     process_array.remove(fileobj)
     set_progress()
   }

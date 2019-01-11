@@ -67,20 +67,6 @@ function playlists(){
   })
 }
 
-function song_find(item,callback){
-  var query = new AV.Query('Song')
-  query.find().then(function(objects){
-    for(var i=0; i<objects.length; i++){
-      var object = objects[i]
-      if(object['attributes']['title'] === item['title'] 
-        && object['attributes']['singer'] === item['singer']){
-          callback.call(null,object.id)
-          break
-        }
-    }  
-  })
-}
-
 function updateLists([item,fileobj,parent,callback]){
   // if(item === undefined) return
   var template
@@ -106,7 +92,7 @@ function updateLists([item,fileobj,parent,callback]){
 
 window.eventHub.on('updateLists',updateLists)
 
-function song_save(fileobj){
+function song_save(fileobj,callback){
   var song = new Song();
   song.save({
     title: fileobj["title"] || '未知',
@@ -118,6 +104,8 @@ function song_save(fileobj){
     lyric: ''
   }).then(function(object) {
     console.log(fileobj["title"]+'保存成功')
+    fileobj.id = object.id
+    callback()
   })
 }
 

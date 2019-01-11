@@ -410,6 +410,7 @@ main div.add_edit{
   /* border: 1px solid darkcyan; */
   position: relative;
   display: flex;
+  justify-content: space-between;
   z-index: 2;
 }
 
@@ -419,6 +420,7 @@ main div.add_edit{
   position: relative;
   /* width: 36px;
   height: 36px; */
+  /* min-width: 32px; */
 }
 
 .upload-item .column-thumbnail img{
