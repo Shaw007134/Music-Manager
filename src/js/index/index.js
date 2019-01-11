@@ -152,7 +152,6 @@ function carousel(option, interval) {
   function play() {
     option.timer = setInterval(function() {
       animate(current+1)
-      console.log(current)
     }, interval);
   }
 
@@ -179,9 +178,9 @@ function carousel(option, interval) {
     hidden = "webkitHidden";
     visibilityChange = "webkitvisibilitychange";
   }
-  document.addEventListener(visibilityChange,function(){
-    console.log("visibilitychange current is: "+current)
-
+  document.addEventListener(visibilityChange,function(e){
+    console.log("visibilitychange status: "+document.hidden)
+    console.log(e)
     if(document.hidden){
       stop();
     }else{
