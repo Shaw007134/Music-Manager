@@ -45,7 +45,7 @@ body {
   width: 90px;
   height: 25px;
   margin: 9px 0 0 10px;
-  background-image: url(..//assets/img/logo.png);
+  background-image: url(/assets/img/logo.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
