@@ -181,14 +181,9 @@ function carousel(option, interval) {
   document.addEventListener(visibilityChange,function(e){
     console.log("visibilitychange status: "+document.hidden)
     if(document.hidden){
-      console.log('hidden')
       stop();
-      console.log(option.timer)
     }else{
-      console.log('-----')
-      console.log(option.timer)
-      if(!option.timer) play();
-      console.log('-----')
+      play();
     }
   })
 
